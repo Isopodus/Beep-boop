@@ -12,34 +12,33 @@ class Card extends React.Component {
             playing: false
         }
         this.onStop = this.onStop.bind(this);
+        this.startRecording = this.startRecording.bind(this);
+        this.stopRecording = this.stopRecording.bind(this);
         this.startListening = this.startListening.bind(this);
     }
 
-    startListening = () => {
+    startListening() {
         this.setState({
             playing: !this.state.playing
         });
     }
 
-    startRecording = () => {
+    startRecording() {
         this.setState({
           record: true
         });
     }
      
-    stopRecording = () => {
+    stopRecording() {
         this.setState({
           record: false
         });
     }
-     
-    onData(recordedBlob) {
-        console.log('chunk of real-time data is: ', recordedBlob);
-    }
-     
+
     onStop(recordedBlob) {
-        console.log('recordedBlob is: ', recordedBlob);
-        this.setState({url: URL.createObjectURL(recordedBlob.blob) })
+        if (recordedBlob) {
+            this.setState({ url: recordedBlob.blobURL })
+        }
     }
 
     render() {
@@ -49,7 +48,8 @@ class Card extends React.Component {
                 <p className="heading">{this.props.title} <br/> <span>{this.props.accent}</span></p>
     
                 <div className="description">
-                    <div style={{display: this.props.case? '' : 'none' }}>
+                    {this.props.case ? (
+                    <div>
                         <div className="audio_columns one">
                             Завантажте файл:<br/>
                             <center><label htmlFor="files">Завантажити аудіо</label></center>
@@ -63,11 +63,11 @@ class Card extends React.Component {
                             <button onClick={this.startListening} type="button">Listen</button>
                             <ReactPlayer style={{display: 'none'}} url={this.state.url} playing={this.state.playing} />
                         </div>
-                    </div>
-    
-                    <div style={{display: this.props.case? 'none' : '' }}>
-                        <textarea placeholder={"I'm blue da ba dee da ba daa..."} rows={'3'}/>
-                    </div>
+                        </div>) : (
+                            <div>
+                                <textarea placeholder={"I'm blue da ba dee da ba daa..."} rows={'3'} />
+                            </div>
+                        )}
                 </div>
     
                 <div className="btn_block">

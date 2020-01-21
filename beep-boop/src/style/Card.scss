@@ -94,6 +94,23 @@
         border: 2px solid #ff6666;
         background: #ff6666;
     }
+    .red_blinking {
+        animation: blink;
+        animation-duration: 1s;
+        animation-iteration-count: infinite;
+        border: 2px solid #ff6666;
+        color: #ff6666;
+    }
+    @keyframes blink {
+        0% {
+            border: 2px solid #ff6666;
+        }
+        50% {
+            border: 2px solid #ff6666;
+            background: #ff6666;
+            color: white;
+        }
+    }
     .blue {
         border: 2px solid #5a78ed;
         color: #5a78ed;

@@ -8,7 +8,7 @@ function History() {
     return (
         <center>
             <div className="history">
-                <img src={history} />
+                <img src={history} alt=""/>
             </div>
         </center>
     )

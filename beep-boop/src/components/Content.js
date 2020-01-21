@@ -34,7 +34,7 @@ class Content extends React.Component {
                 <div className="triangle" />
                 <div className="game">
                     <p className="title">Title</p>
-                    <section style={{ display: this.props.game ? '' : 'none' }}>
+                    <section style={{ display: this.props.game ? '' : 'none', marginBottom: 0 }}>
                         {cards}
                     </section>
                     <History />

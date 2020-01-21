@@ -1,6 +1,8 @@
 import React from 'react';
+import { connect } from 'react-redux'
 import { ReactMic } from 'react-mic';
 import ReactPlayer from 'react-player'
+
 import '../style/Card.scss'
 
 class Card extends React.Component {
@@ -8,9 +10,9 @@ class Card extends React.Component {
         super(props);
         this.state = {
             record: false,
-            url: null,
             playing: false
         }
+
         this.onStop = this.onStop.bind(this);
         this.startRecording = this.startRecording.bind(this);
         this.stopRecording = this.stopRecording.bind(this);
@@ -36,46 +38,73 @@ class Card extends React.Component {
     }
 
     onStop(recordedBlob) {
-        if (recordedBlob) {
             this.setState({ url: recordedBlob.blobURL })
-        }
     }
 
     render() {
         return(
             <div className='card'>
-                <center><img src={this.props.url}/></center>
+                <center><img src={this.props.imgUrl}/></center>
                 <p className="heading">{this.props.title} <br/> <span>{this.props.accent}</span></p>
     
                 <div className="description">
                     {this.props.case ? (
                     <div>
-                        <div className="audio_columns one">
-                            Завантажте файл:<br/>
-                            <center><label htmlFor="files">Завантажити аудіо</label></center>
-                            <input style={{visibility: "hidden", display: "none"}} id="files" type="file" accept="audio/*" name="file"/>
+                        <table>
+                            <tr>
+                                <td>Завантаж файл:</td>
+                                <td>або зроби запис прямо тут:</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <center><label className="btn red" htmlFor="files">Завантажити</label></center>
+                                    <input
+                                        style={{visibility: "hidden", display: "none"}}
+                                        id="files"
+                                        type="file"
+                                        accept="audio/*"
+                                        name="file"
+                                    />
+                                </td>
+                                <td>
+                                    <ReactMic record={this.state.record} className="sound" onStop={this.props.onStop} width={0} height={0} />
+                                    <button
+                                        onClick={this.state.record ? this.stopRecording : this.startRecording }
+                                        type="button"
+                                        className="btn red"
+                                    >
+                                        {this.state.record ? 'Стоп' : 'Почати запис'}
+                                    </button>
+                                    <div class="divider"/>
+                                    {/* <button onClick={this.startListening} type="button" className="btn red">Прослухати</button>
+                                    <ReactPlayer style={{display: 'none'}} url={this.props.url} playing={this.state.playing} /> */}
+                                </td>
+                            </tr>
+                        </table>
+                    </div>)
+                    : (
+                        <div>
+                            <textarea placeholder={"I'm blue da ba dee da ba daa..."} rows={'3'} />
                         </div>
-                        <div className="audio_columns two">
-                            або зроби запис прямо тут:
-                            <ReactMic record={this.state.record} style={{width: '10px'}} className="sound" onStop={this.onStop} />
-                            <button onClick={this.startRecording} type="button">Start</button>
-                            <button onClick={this.stopRecording} type="button">Stop</button>
-                            <button onClick={this.startListening} type="button">Listen</button>
-                            <ReactPlayer style={{display: 'none'}} url={this.state.url} playing={this.state.playing} />
-                        </div>
-                        </div>) : (
-                            <div>
-                                <textarea placeholder={"I'm blue da ba dee da ba daa..."} rows={'3'} />
-                            </div>
-                        )}
+                    )}
                 </div>
     
                 <div className="btn_block">
-                    <input className="btn" type="submit" name="submit" value="Надіслати" />
+                    <input className="btn blue" type="submit" name="submit" value="Надіслати" />
                 </div>
             </div>
         )
     }
 }
 
-export default Card
+function mapDispatchToProps(dispatch) {
+    return {
+        onStop: (newState) => dispatch({ type: 'ON_STOP', newState })
+    }
+}
+
+function mapStateToProps(state) {
+    return { url: state.url }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Card)

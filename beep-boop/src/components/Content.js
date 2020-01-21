@@ -1,7 +1,10 @@
 import React from 'react';
+import { connect } from 'react-redux'
+
 import '../style/Content.scss'
 
 import Card from './Card'
+import History from './History'
 import audio from '../img/audio.png'
 import text from '../img/text.png'
 
@@ -10,14 +13,14 @@ const data = [
         title: 'Пошук за допомогою',
         accent: 'запису',
         description: 'Описание тоже на две строчки, потом посмотрим, что там будет',
-        url: audio,
+        imgUrl: audio,
         case: true
     },
     {
         title: 'Пошук за допомогою',
         accent: 'тексту',
         description: 'Описание тоже на две строчки, потом посмотрим, что там будет №2',
-        url: text,
+        imgUrl: text,
         case: false
     },
 ]
@@ -31,13 +34,18 @@ class Content extends React.Component {
                 <div className="triangle" />
                 <div className="game">
                     <p className="title">Title</p>
-                    <section>
+                    <section style={{ display: this.props.game ? '' : 'none' }}>
                         {cards}
                     </section>
+                    <History />
                 </div>
             </>
         )
     }
 }
 
-export default Content
+function mapStateToProps(state) {
+    return { game: state.game }
+}
+
+export default connect(mapStateToProps)(Content)

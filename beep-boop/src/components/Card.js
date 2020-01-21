@@ -13,13 +13,13 @@ class Card extends React.Component {
             playing: false
         }
 
-        this.onStop = this.onStop.bind(this);
         this.startRecording = this.startRecording.bind(this);
         this.stopRecording = this.stopRecording.bind(this);
-        this.startListening = this.startListening.bind(this);
+        this.toggleListening = this.toggleListening.bind(this);
+        this.handleFile = this.handleFile.bind(this);
     }
 
-    startListening() {
+    toggleListening() {
         this.setState({
             playing: !this.state.playing
         });
@@ -27,84 +27,131 @@ class Card extends React.Component {
 
     startRecording() {
         this.setState({
-          record: true
-        });
-    }
-     
-    stopRecording() {
-        this.setState({
-          record: false
+            record: true
         });
     }
 
-    onStop(recordedBlob) {
-            this.setState({ url: recordedBlob.blobURL })
+    stopRecording() {
+        this.setState({
+            record: false
+        });
+    }
+    handleFile(e) {
+        this.props.updateFile(e.target.files[0])
     }
 
     render() {
-        return(
+        return (
             <div className='card'>
-                <center><img src={this.props.imgUrl}/></center>
-                <p className="heading">{this.props.title} <br/> <span>{this.props.accent}</span></p>
-    
+                <center><img src={this.props.imgUrl} alt="" /></center>
+                <p className="heading">{this.props.title} <br /> <span>{this.props.accent}</span></p>
+
                 <div className="description">
                     {this.props.case ? (
-                    <div>
-                        <table>
-                            <tr>
-                                <td>Завантаж файл:</td>
-                                <td>або зроби запис прямо тут:</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <center><label className="btn red" htmlFor="files">Завантажити</label></center>
-                                    <input
-                                        style={{visibility: "hidden", display: "none"}}
-                                        id="files"
-                                        type="file"
-                                        accept="audio/*"
-                                        name="file"
-                                    />
-                                </td>
-                                <td>
-                                    <ReactMic record={this.state.record} className="sound" onStop={this.props.onStop} width={0} height={0} />
-                                    <button
-                                        onClick={this.state.record ? this.stopRecording : this.startRecording }
-                                        type="button"
-                                        className="btn red"
-                                    >
-                                        {this.state.record ? 'Стоп' : 'Почати запис'}
-                                    </button>
-                                    <div class="divider"/>
-                                    {/* <button onClick={this.startListening} type="button" className="btn red">Прослухати</button>
-                                    <ReactPlayer style={{display: 'none'}} url={this.props.url} playing={this.state.playing} /> */}
-                                </td>
-                            </tr>
-                        </table>
-                    </div>)
-                    : (
                         <div>
-                            <textarea placeholder={"I'm blue da ba dee da ba daa..."} rows={'3'} />
-                        </div>
-                    )}
+                            <table>
+                                <tbody>
+                                    {this.props.file ? (<>
+                                        <tr><td>Ваш файл:</td></tr>
+                                        <tr><td>{this.props.file ? this.props.file.name : "Error"}</td></tr>
+                                        <tr><td>
+                                            <button
+                                                onClick={() => this.props.updateFile(null)}
+                                                type="button"
+                                                className="btn red"
+                                            >Назад</button>
+                                        </td></tr>
+                                    </>) : (this.props.blobUrl ? (<>
+                                        <tr>
+                                            <td colSpan="2">
+                                                Ваш запис:
+                                                <ReactPlayer
+                                                    width="0"
+                                                    height="0"
+                                                    className="player"
+                                                    url={this.props.blobUrl}
+                                                    playing={this.state.playing}
+                                                    onEnded={() => this.setState({ playing: false })} />
+                                            </td>
+                                        </tr>
+                                        <tr style={{ marginBottom: 20 }}><td>
+                                            <button
+                                                onClick={this.toggleListening}
+                                                type="button"
+                                                className="btn red"
+                                            >{this.state.playing ? 'Стоп' : 'Прослухати'}</button>
+                                        </td></tr>
+                                        <tr><td>
+                                            <button
+                                                onClick={() => this.props.updateBlob(null)}
+                                                type="button"
+                                                className="btn red"
+                                            >Назад</button>
+                                        </td></tr>
+                                    </>) : (<>
+                                        <tr>
+                                            <td>Завантаж файл:</td>
+                                            <td>Або зроби аудiозапис:</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label className="btn red" htmlFor="files">Завантажити</label>
+                                                <input
+                                                    style={{ visibility: "hidden", display: "none" }}
+                                                    id="files"
+                                                    type="file"
+                                                    accept="audio/*"
+                                                    name="file"
+                                                    onChange={this.handleFile}
+                                                />
+                                            </td>
+                                            <td>
+                                                <ReactMic
+                                                    record={this.state.record}
+                                                    className="sound"
+                                                    onStop={(blob) => this.props.updateBlob(blob.blobURL)}
+                                                    width={0} height={0} />
+                                                <button
+                                                    onClick={this.state.record ? this.stopRecording : this.startRecording}
+                                                    type="button"
+                                                    className={this.state.record ? "btn red_blinking" : "btn red"}
+                                                >
+                                                    {this.state.record ? 'Стоп' : 'Почати запис'}
+                                                </button>
+                                                <div className="divider" />
+                                            </td>
+                                        </tr>
+                                    </>))}
+                                </tbody>
+                            </table>
+                        </div>)
+                        : (
+                            <div>
+                                <textarea placeholder={"I'm blue da ba dee da ba daa..."} rows={'3'} />
+                            </div>
+                        )}
                 </div>
-    
+
                 <div className="btn_block">
                     <input className="btn blue" type="submit" name="submit" value="Надіслати" />
                 </div>
-            </div>
+            </div >
         )
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        onStop: (newState) => dispatch({ type: 'ON_STOP', newState })
+        updateBlob: (blobUrl) => dispatch({ type: 'UPDATE_BLOB', blobUrl: blobUrl }),
+        updateFile: (file) => dispatch({ type: 'UPDATE_FILE', file: file }),
     }
 }
 
 function mapStateToProps(state) {
-    return { url: state.url }
+    return {
+        blobUrl: state.blobUrl,
+        file: state.file
+    }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Card)

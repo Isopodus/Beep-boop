@@ -7,9 +7,17 @@ import Header from './components/Header'
 import Content from './components/Content'
 
 const initState = {
-  currState: true
+  url: null,
+  game: true
 }
-const reducer = (state = initState) => {
+const reducer = (state = initState, action) => {
+  switch(action.type) {
+    case 'ON_STOP': {
+      console.log(state.url)
+      return { ...state, url: action.newState.blobURL }
+    }
+  }
+
   return state
 }
 const store = createStore(reducer);

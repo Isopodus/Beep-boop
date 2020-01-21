@@ -1,16 +1,20 @@
 import React from 'react';
-import { connect } from 'react-redux'
 
-import history from '../img/history.png'
 import '../style/History.scss'
 
-function History() {
+function History(props) {
     return (
-        <center>
-            <div className="history">
-                <img src={history} />
-            </div>
-        </center>
+        <div className="history">
+            <a className="close" onClick={props.close}>{String.fromCharCode(215)}</a>
+            <h1>Історія ігор</h1>
+            <table>
+                <thead>
+                    <th>Номер гри</th>
+                    <th>Композиція</th>
+                    <th>Результат</th>
+                </thead>
+            </table>
+        </div>
     )
 }
 

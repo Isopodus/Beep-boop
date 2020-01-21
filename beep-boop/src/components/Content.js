@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import '../style/Content.scss'
 
 import Card from './Card'
-import History from './History'
+import Introduction from './Introduction'
 import audio from '../img/audio.png'
 import text from '../img/text.png'
 
@@ -34,10 +34,26 @@ class Content extends React.Component {
                 <div className="triangle" />
                 <div className="game">
                     <p className="title">Title</p>
-                    <section style={{ display: this.props.game ? '' : 'none' }}>
+                    <Introduction />
+                    <section style={{ display: this.props.game ? '' : 'none', marginBottom: 0 }}>
+                        <div className="game_data">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Залишилось спроб:</th>
+                                        <th>Поточний рахунок:</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td className="attempts">0</td>
+                                        <td className="score"><span>гість</span>0:0<span>додаток</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                         {cards}
                     </section>
-                    <History />
                 </div>
             </>
         )

@@ -61,7 +61,6 @@ class Card extends React.Component {
                                     >
                                         {this.state.record ? 'Стоп' : 'Почати запис'}
                                     </button>
-                                    <div class="divider"/>
                                     {/* <button onClick={this.startListening} type="button" className="btn red">Прослухати</button>
                                     <ReactPlayer style={{display: 'none'}} url={this.props.url} playing={this.state.playing} /> */}
                                 </td>

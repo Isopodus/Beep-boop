@@ -47,11 +47,6 @@
                 width: 50%;
                 text-align: center;
             }
-            .divider {
-                width:5px;
-                height:auto;
-                display:inline-block;
-            }   
         }     
         textarea {
             margin-top: 10px;
@@ -70,37 +65,6 @@
     }
     .btn_block {
         margin: 20px;
-    }
-    .btn {
-        cursor: pointer;
-        padding: 10px;
-        font-weight: bold;
-        font-family: "DINPro-Medium";
-        font-size: 18px;
-        background: none;
-        transition: .3s ease-in-out;
-        outline: none;
-    }
-    .btn:hover {
-        font-weight: normal;
-        color: white;
-        transition: .3s ease-in-out;
-    }
-    .red {
-        border: 2px solid #ff6666;
-        color: #ff6666;
-    }
-    .red:hover {
-        border: 2px solid #ff6666;
-        background: #ff6666;
-    }
-    .blue {
-        border: 2px solid #5a78ed;
-        color: #5a78ed;
-    }
-    .blue:hover {
-        border: 2px solid #5a78ed;
-        background: #5a78ed;
     }
 }
 .card:hover {

@@ -8,13 +8,17 @@ import Content from './components/Content'
 
 const initState = {
   url: null,
-  game: true
+  game: false,
+  popUp: false
 }
 const reducer = (state = initState, action) => {
   switch(action.type) {
     case 'ON_STOP': {
-      console.log(state.url)
       return { ...state, url: action.newState.blobURL }
+    }
+    case 'START_GAME': {
+      console.log(state.game)
+      return { ...state, game: true }
     }
   }
 

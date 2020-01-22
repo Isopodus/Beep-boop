@@ -8,8 +8,8 @@ import '../style/Introduction.scss'
 
 function Introduction(props) {
     return (
-        <div className="introduction">
-            <img src={introduction} />
+        <div id="introduction" className="introduction">
+            <img src={introduction} alt=""/>
             <div className="wrap">
                 <h2>Коротко про правила гри:</h2>
                 <div className="rules">

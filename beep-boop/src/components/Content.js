@@ -1,10 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux'
+import Popup from "reactjs-popup";
 
 import '../style/Content.scss'
 
 import Card from './Card'
 import Introduction from './Introduction'
+import RecognitionResponse from './RecognitionResponse'
 import audio from '../img/audio.png'
 import text from '../img/text.png'
 
@@ -26,13 +28,16 @@ const data = [
 ]
 
 class Content extends React.Component {
+    constructor(props) {
+        super(props);
+    }
     render() {
         var cards = data.map(record => { return <Card key={record.case} {...record} /> })
 
         return(
             <>
                 <div className="triangle" />
-                <div id="game" className="game">
+                <div className="game">
                     <p className="title">Title</p>
                     <Introduction />
                     <section style={{ display: this.props.game ? '' : 'none', marginBottom: 0 }}>
@@ -46,13 +51,16 @@ class Content extends React.Component {
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td className="attempts">{this.props.attempts}</td>
+                                        <td className="attempts">{this.props.currentGame.attempts}</td>
                                         <td className="score"><span>гість</span>0:0<span>додаток</span></td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                         {cards}
+                        { this.props.currentGame.possibleSong === null
+                            ? null
+                            : <Popup open={true} modal>{close => ( <RecognitionResponse {...{close: close}}/> )}</Popup> }
                     </section>
                 </div>
             </>
@@ -61,7 +69,10 @@ class Content extends React.Component {
 }
 
 function mapStateToProps(state) {
-    return { game: state.game, attempts: state.attempts }
+    return { 
+        game: state.game, 
+        currentGame: state.currentGame 
+    }
 }
 
 export default connect(mapStateToProps)(Content)

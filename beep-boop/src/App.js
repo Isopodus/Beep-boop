@@ -19,18 +19,14 @@ const initState = {
     }
 }
 
-function f() {
-    window.scrollBy(0, document.getElementById('game').offsetHeight);
-}
-
 const reducer = (state = initState, action) => {
     switch (action.type) {
         case 'START_GAME': {
+            setTimeout(() => { window.scrollBy(0, document.getElementById('game').offsetHeight); }, 100);
             return {
                 ...state,
                 game: true
             }
-            f()
         }
         case 'UPDATE_GAME': {
             return {

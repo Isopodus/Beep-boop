@@ -5,10 +5,8 @@ import '../style/Header.scss'
 function Header() {
     return (
         <div className="header">
-            <center>
-                <img src={vinyl} alt=""/>
-                <p>Beep-boop</p>
-            </center>
+            <img src={vinyl} alt=""/>
+            <p>Beep-boop</p>
         </div>
     )
 }

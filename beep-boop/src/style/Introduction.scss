@@ -26,6 +26,12 @@
             margin: 20px;
             border: 1px #5a78ed solid;
             font-family: "DINPro-Medium";
+
+            ul {
+                li {
+                    text-align: left;
+                }
+            }
         }
         button {
             display: inline-block;

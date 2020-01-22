@@ -32,7 +32,7 @@ class Content extends React.Component {
         return(
             <>
                 <div className="triangle" />
-                <div className="game">
+                <div id="game" className="game">
                     <p className="title">Title</p>
                     <Introduction />
                     <section style={{ display: this.props.game ? '' : 'none', marginBottom: 0 }}>
@@ -46,7 +46,7 @@ class Content extends React.Component {
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td className="attempts">0</td>
+                                        <td className="attempts">{this.props.attempts}</td>
                                         <td className="score"><span>гість</span>0:0<span>додаток</span></td>
                                     </tr>
                                 </tbody>
@@ -61,7 +61,7 @@ class Content extends React.Component {
 }
 
 function mapStateToProps(state) {
-    return { game: state.game }
+    return { game: state.game, attempts: state.attempts }
 }
 
 export default connect(mapStateToProps)(Content)

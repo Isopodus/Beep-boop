@@ -7,8 +7,9 @@ import Header from './components/Header'
 import Content from './components/Content'
 
 const initState = {
-    blobUrl: null,
+    blob: null,
     file: null,
+    text: "",
     game: true
 }
 
@@ -17,13 +18,19 @@ const reducer = (state = initState, action) => {
         case 'UPDATE_BLOB': {
             return {
                 ...state,
-                blobUrl: action.blobUrl
+                blob: action.blob
             }
         }
         case 'UPDATE_FILE': {
             return {
                 ...state,
                 file: action.file
+            }
+        }
+        case 'UPDATE_TEXT': {
+            return {
+                ...state,
+                text: action.text
             }
         }
         default: {

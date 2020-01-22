@@ -25,7 +25,6 @@ const reducer = (state = initState, action) => {
           ...state,
           game: true
         }
-        f()
       }
       case 'UPDATE_BLOB': {
           return {

@@ -12,7 +12,11 @@ const initState = {
     file: null,
     text: "",
     game: false,
-    attempts: 0
+    currentGame: {
+        attempts: 0,
+        possibleSong: null,
+        computerWon: false
+    }
 }
 
 function f() {
@@ -27,6 +31,12 @@ const reducer = (state = initState, action) => {
                 game: true
             }
             f()
+        }
+        case 'UPDATE_GAME': {
+            return {
+                ...state,
+                currentGame: action.game
+            }
         }
         case 'UPDATE_BLOB': {
             return {

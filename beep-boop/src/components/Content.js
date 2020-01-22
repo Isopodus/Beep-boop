@@ -61,7 +61,10 @@ class Content extends React.Component {
 }
 
 function mapStateToProps(state) {
-    return { game: state.game, attempts: state.attempts }
+    return { 
+        game: state.game, 
+        currentGame: state.currentGame 
+    }
 }
 
 export default connect(mapStateToProps)(Content)

@@ -59,8 +59,12 @@ class Card extends React.Component {
         formData.append("record", file);
         api.sendAudio(formData)
             .then((response) => {
-                if (response.status === 200) {
-                    console.log(response.data)
+                if (response.status === 200 && response.data.status === "success") {
+                    this.props.updateGame({
+                        ...this.props.currentGame,
+                        possibleSong: response.data.result[0]
+                    })
+                    console.log(this.props.currentGame)
                 }
             })
             .catch((error) => {
@@ -71,8 +75,12 @@ class Card extends React.Component {
     sendText() {
         api.sendText(this.props.text)
             .then((response) => {
-                if (response.status === 200) {
-                    console.log(response.data)
+                if (response.status === 200 && response.data.status === "success") {
+                    this.props.updateGame({
+                        ...this.props.currentGame,
+                        possibleSong: response.data.result[0]
+                    })
+                    console.log(this.props.currentGame)
                 }
             })
             .catch((error) => {
@@ -187,6 +195,7 @@ function mapDispatchToProps(dispatch) {
         updateBlob: (blob) => dispatch({ type: 'UPDATE_BLOB', blob: blob }),
         updateFile: (file) => dispatch({ type: 'UPDATE_FILE', file: file }),
         updateText: (text) => dispatch({ type: 'UPDATE_TEXT', text: text }),
+        updateGame: (game) => dispatch({ type: 'UPDATE_GAME', game: game }),
     }
 }
 
@@ -194,7 +203,8 @@ function mapStateToProps(state) {
     return {
         blob: state.blob,
         file: state.file,
-        text: state.text
+        text: state.text,
+        currentGame: state.currentGame 
     }
 }
 

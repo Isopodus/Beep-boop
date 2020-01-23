@@ -1,11 +1,29 @@
+@import 'mixin';
+
 .header {
     text-align: center;
-
+    
     img {
+        $imgWidth: 40%;
         position: relative;
         z-index: 1;
-        width: 40%;
-        margin-top: -20%;
+        width: $imgWidth;
+        @include media((
+            width: (
+                mobile: $imgWidth * 1.8,
+                tablet: $imgWidth * 1.8,
+                laptop: $imgWidth,
+                desktop: $imgWidth,
+                tv: $imgWidth
+            ),
+            margin-top: (
+                mobile: -38%,
+                tablet: -38%,
+                laptop: -20%,
+                desktop: -20%,
+                tv: -20%
+            ),
+        ));
         animation: rotate 30s linear infinite;
         @keyframes rotate {
             0% {
@@ -16,15 +34,29 @@
             }
         }
     }
+    
+    $headerSize: 150px;
     p {
         position: relative;
         z-index: 2;
         color: #ff6666;
         font-family: "Wolf in the City";
         letter-spacing: 5px;
-        font-size: 150px;
         margin: -50px 0 0 0;
         padding: 0;
         -webkit-text-stroke: 2px black;
+
+        font-size: $headerSize;
+        @include media((
+            font-size: (
+                mobile: $headerSize * 2,
+                tablet: $headerSize * 2,
+                laptop: $headerSize,
+                desktop: $headerSize,
+                tv: $headerSize * 2,
+            ),
+            margin-top: (
+                tv: -120px)
+        ));
     }
 }

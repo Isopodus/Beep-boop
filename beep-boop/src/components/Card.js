@@ -125,20 +125,22 @@ class Card extends React.Component {
                                                     onEnded={() => this.setState({ playing: false })} />
                                             </td>
                                         </tr>
-                                        <tr style={{ marginBottom: 20 }}><td>
-                                            <button
-                                                onClick={this.toggleListening}
-                                                type="button"
-                                                className="btn red"
-                                            >{this.state.playing ? 'Стоп' : 'Прослухати'}</button>
-                                        </td></tr>
-                                        <tr><td>
-                                            <button
-                                                onClick={() => this.props.updateBlob(null)}
-                                                type="button"
-                                                className="btn red"
-                                            >Назад</button>
-                                        </td></tr>
+                                        <tr style={{ marginBottom: 20 }}>
+                                            <td>
+                                                <button
+                                                    onClick={() => this.props.updateBlob(null)}
+                                                    type="button"
+                                                    className="btn red"
+                                                >Вiдмiнити</button>
+                                            </td>
+                                            <td>
+                                                <button
+                                                    onClick={this.toggleListening}
+                                                    type="button"
+                                                    className="btn red"
+                                                >{this.state.playing ? 'Стоп' : 'Прослухати'}</button>
+                                            </td>
+                                        </tr>
                                     </>) : (<>
                                         <tr>
                                             <td>Завантаж файл:</td>
@@ -206,7 +208,7 @@ function mapStateToProps(state) {
         blob: state.blob,
         file: state.file,
         text: state.text,
-        currentGame: state.currentGame 
+        currentGame: state.currentGame
     }
 }
 

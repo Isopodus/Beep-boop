@@ -1,7 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import Popup from "reactjs-popup";
+import Slider from "react-slick";
 
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import '../style/Content.scss'
 
 import Card from './Card'
@@ -28,17 +31,21 @@ const data = [
 ]
 
 class Content extends React.Component {
-    constructor(props) {
-        super(props);
-    }
     render() {
         var cards = data.map(record => { return <Card key={record.case} {...record} /> })
-
-        return(
+        var settings = {
+            arrows: false,
+            dots: true,
+            infinite: true,
+            speed: 500,
+            slidesToShow: 1,
+            slidesToScroll: 1
+        };
+        return (
             <>
                 <div className="triangle" />
                 <div className="game">
-                    <p className="title">Title</p>
+                    <p className="title">Музичний акiнатор</p>
                     <Introduction />
                     <section style={{ display: this.props.game ? '' : 'none', marginBottom: 0 }}>
                         <div className="game_data">
@@ -52,15 +59,26 @@ class Content extends React.Component {
                                 <tbody>
                                     <tr>
                                         <td className="attempts">{this.props.currentGame.attempts}</td>
-                                        <td className="score"><span>гість</span>0:0<span>додаток</span></td>
+                                        <td className="score">0:0</td>
+                                    </tr>
+                                    <tr className="delimiter">
+                                        <td></td>
+                                        <td>
+                                            <span>гість</span><span>додаток</span>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
-                        {cards}
-                        { this.props.currentGame.possibleSong === null
+                        <div className="cards">
+                            {cards}
+                        </div>
+                        <Slider {...settings} className="cards_slider">
+                            {cards}
+                        </Slider>
+                        {this.props.currentGame.possibleSong === null
                             ? null
-                            : <Popup open={true} modal>{close => ( <RecognitionResponse {...{close: close}}/> )}</Popup> }
+                            : <Popup open={true} modal>{close => (<RecognitionResponse {...{ close: close }} />)}</Popup>}
                     </section>
                 </div>
             </>
@@ -69,9 +87,9 @@ class Content extends React.Component {
 }
 
 function mapStateToProps(state) {
-    return { 
-        game: state.game, 
-        currentGame: state.currentGame 
+    return {
+        game: state.game,
+        currentGame: state.currentGame
     }
 }
 

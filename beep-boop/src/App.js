@@ -1,12 +1,12 @@
 import React from 'react';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
-import Cookie from 'universal-cookie'
+//import Cookie from 'universal-cookie'
 
 import Header from './components/Header'
 import Content from './components/Content'
 
-const cookies = new Cookie();
+//const cookies = new Cookie();
 
 const initState = {
     blob: null,

@@ -35,6 +35,9 @@ class Card extends React.Component {
         this.setState({
             record: true
         });
+        setTimeout(function(){
+            this.stopRecording();
+        }.bind(this), 20000);
     }
 
     stopRecording() {
@@ -44,8 +47,15 @@ class Card extends React.Component {
     }
 
     handleFile(e) {
-        this.props.updateFile(e.target.files[0])
-        this.props.updateBlob(null)
+        if (e.target.files[0].size > 10485760) {
+            e.target.value = null
+            this.props.updateFile(false)
+            this.props.updateBlob(null)
+        }
+        else {
+            this.props.updateFile(e.target.files[0])
+            this.props.updateBlob(null)
+        }
     }
 
     handleText(e) {
@@ -66,7 +76,6 @@ class Card extends React.Component {
                         ...this.props.currentGame,
                         possibleSong: response.data.result ? response.data.result[0] : false
                     })
-                    console.log(this.props.currentGame)
                 }
             })
             .catch((error) => {
@@ -82,7 +91,6 @@ class Card extends React.Component {
                         ...this.props.currentGame,
                         possibleSong: response.data.result ? response.data.result[0] : false
                     })
-                    console.log(this.props.currentGame)
                 }
             })
             .catch((error) => {
@@ -94,7 +102,7 @@ class Card extends React.Component {
     render() {
         return (
             <div className='card'>
-                <center><img src={this.props.imgUrl} alt="" /></center>
+                <img src={this.props.imgUrl} alt="" />
                 <p className="heading">{this.props.title} <br /> <span>{this.props.accent}</span></p>
 
                 <div className="description">
@@ -102,16 +110,19 @@ class Card extends React.Component {
                         <div>
                             <table>
                                 <tbody>
-                                    {this.props.file ? (<>
+                                    {this.props.file != null ? (<>
                                         <tr><td>Ваш файл:</td></tr>
-                                        <tr><td>{this.props.file ? this.props.file.name : "Error"}</td></tr>
-                                        <tr><td>
-                                            <button
+                                        <tr>
+                                            <td className="audio_file">
+                                                {this.props.file ? this.props.file.name : "Сталася помилка, спробуйте ще раз!"}
+                                                <div
                                                 onClick={() => this.props.updateFile(null)}
-                                                type="button"
-                                                className="btn red"
-                                            >Назад</button>
-                                        </td></tr>
+                                                className="delete"
+                                                >
+                                                    {String.fromCharCode(215)}
+                                                </div>
+                                            </td>
+                                        </tr>
                                     </>) : (this.props.blob ? (<>
                                         <tr>
                                             <td colSpan="2">
@@ -125,22 +136,15 @@ class Card extends React.Component {
                                                     onEnded={() => this.setState({ playing: false })} />
                                             </td>
                                         </tr>
-                                        <tr style={{ marginBottom: 20 }}>
-                                            <td>
-                                                <button
-                                                    onClick={() => this.props.updateBlob(null)}
-                                                    type="button"
-                                                    className="btn red"
-                                                >Вiдмiнити</button>
-                                            </td>
-                                            <td>
-                                                <button
-                                                    onClick={this.toggleListening}
-                                                    type="button"
-                                                    className="btn red"
-                                                >{this.state.playing ? 'Стоп' : 'Прослухати'}</button>
-                                            </td>
-                                        </tr>
+                                        <tr style={{ marginBottom: 20 }}><td>
+                                            <div onClick={this.toggleListening} className="play">
+                                                { this.state.playing ? String.fromCharCode(9209) : String.fromCharCode(9654) }
+                                            </div>
+                                            <p style={{ display: 'inline-block', margin: 0 }}>Голосовий запис</p>
+                                            <div onClick={() => this.props.updateBlob(null)} className="delete">
+                                                {String.fromCharCode(215)}
+                                            </div>
+                                        </td></tr>
                                     </>) : (<>
                                         <tr>
                                             <td>Завантаж файл:</td>

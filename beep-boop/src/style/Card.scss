@@ -101,16 +101,6 @@
         font-size: 18px;
         font-weight: 500;
 
-        .audio_columns {
-            margin-top: 10px;
-            vertical-align: top;
-            display: inline-block;
-
-            .one,
-            .two {
-                width: 50%;
-            }
-        }
         table {
             margin: 0 auto;
 
@@ -126,6 +116,37 @@
                     )
                 ));
                 text-align: center;
+            }
+            .audio_file {
+                text-align: center;
+                color: #ff6666;
+            }
+            .delete {
+                color: #ff6666;
+                cursor: pointer;
+                font-weight: bold;
+                margin: 0 15px 0 15px;
+                display: inline-block;
+                background: none;
+                border: none;
+                font-size: 30px;
+                transition: .3s ease-in-out;
+            }
+            .delete:hover {
+                transition: .3s ease-in-out;
+                color: black;
+            }
+            .play {
+                margin: 0 15px 0 15px;
+                cursor: pointer;
+                display: inline-block;
+                font-size: 20px;
+                color: black;
+                transition: .3s ease-in-out;
+            }
+            .play:hover {
+                color: #ff6666;
+                transition: .3s ease-in-out;
             }
         }     
         textarea {

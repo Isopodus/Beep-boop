@@ -210,7 +210,7 @@ function mapStateToProps(state) {
         blob: state.blob,
         file: state.file,
         text: state.text,
-        currentGame: state.currentGame 
+        currentGame: state.currentGame
     }
 }
 

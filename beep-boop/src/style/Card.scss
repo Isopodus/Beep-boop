@@ -1,27 +1,97 @@
+@import 'mixin';
+
+.cards {
+    @include media((
+        display: (
+            mobile: 'none',
+            tablet: 'none',
+            laptop: 'block',
+            desktop: 'block',
+            tv: 'block'
+        )
+    ));
+}
+.cards_slider {
+    @include media((
+        display: (
+            mobile: 'block',
+            tablet: 'block',
+            laptop: 'none',
+            desktop: 'none',
+            tv: 'none'
+        )
+    ));
+}
+
 .card {
+    $cardHeight: 520px;
+    $cardWidth: 35%;
+
     vertical-align: top;
     display: inline-block;
     margin: 30px 30px 20px 30px;
     min-width: 300px;
-    width: 35%;
-    height: 520px;
+    width: $cardWidth;
+    height: $cardHeight;
     background: white;
     transition: .3s ease-in-out;
     padding: 10px;
 
+    @include media((
+        height: (
+            mobile: $cardHeight * 1.85,
+            tablet: $cardHeight * 1.85, 
+            laptop: $cardHeight* 0.83,
+            desktop: $cardHeight * 0.93,
+            tv: $cardHeight * 1.4
+        ),
+        width: (
+            mobile: $cardWidth * 2.6,
+            tablet: $cardWidth * 2.6,
+            laptop: $cardWidth,
+            desktop: $cardWidth,
+            tv: $cardWidth
+        )
+    ));
+
     img {
-        margin: 0 auto;
-        width: 80%;
+        @include media((
+            width: (
+                mobile: 100%,
+                tablet: 100%,
+                laptop: 80%,
+                desktop: 80%,
+                tv: 80%
+            )
+        ));
     }
     .heading {
+        $headingSize: 20px;
         margin: 0;
         padding: 0;
-        font-size: 20px;
+        @include media((
+            font-size: (
+                mobile: $headingSize * 2,
+                tablet: $headingSize * 2,
+                laptop: $headingSize,
+                desktop: $headingSize,
+                tv: $headingSize
+            )
+        ));
         color: #5a78ed;
         text-transform: uppercase;
 
         span {
-            font-size: 30px;
+            $spanSize: 30px;
+            @include media((
+                font-size: (
+                    mobile: $spanSize * 2,
+                    tablet: $spanSize * 2,
+                    laptop: $spanSize,
+                    desktop: $spanSize,
+                    tv: $spanSize
+                )
+            ));
             color: #ff6666;
         }
     }
@@ -36,6 +106,15 @@
 
             tr td {
                 width: 50%;
+                @include media((
+                    font-size: (
+                        mobile: 16px * 2,
+                        tablet: 16px * 2,
+                        laptop: 16px,
+                        desktop: 16px,
+                        tv: 16px
+                    )
+                ));
                 text-align: center;
             }
             .audio_file {
@@ -75,8 +154,26 @@
             width: 80%;
             resize: none;
             font-family: "DINPro-Medium";
-            font-size: 18px;
-            border: 1px solid #5a78ed;
+            
+            $textareaFontSize: 18px;
+            @include media((
+                font-size: (
+                    mobile: $textareaFontSize * 2,
+                    tablet: $textareaFontSize * 2,
+                    laptop: $textareaFontSize,
+                    desktop: $textareaFontSize,
+                    tv: $textareaFontSize
+                ),
+                border-width: (
+                    mobile: 2px,
+                    tablet: 2px,
+                    laptop: 1px,
+                    desktop: 1px,
+                    tv: 1px
+                )
+            ));
+
+            border-color: #5a78ed;
             outline: none !important;
             outline-offset: 0 !important;
         }
@@ -93,10 +190,41 @@
         padding: 10px;
         font-weight: bold;
         font-family: "DINPro-Medium";
-        font-size: 18px;
         background: none;
         transition: .3s ease-in-out;
         outline: none;
+
+        $buttonFontSize: 18px;
+        @include media((
+            font-size: (
+                mobile: $buttonFontSize * 2.5,
+                tablet: $buttonFontSize * 2.5,
+                laptop: $buttonFontSize,
+                desktop: $buttonFontSize,
+                tv: $buttonFontSize,
+            ),
+            border-width: (
+                mobile: 5px,
+                tablet: 5px,
+                laptop: 2px,
+                desktop: 2px,
+                tv: 2px,
+            ),
+            margin: (
+                mobile: 10px,
+                tablet: 10px,
+                laptop: 5px,
+                desktop: 5px,
+                tv: 5px,
+            ),
+            padding: (
+                mobile: 10px,
+                tablet: 10px,
+                laptop: 7px,
+                desktop: 7px,
+                tv: 7px,
+            )
+        ));
     }
     .btn:hover {
         font-weight: normal;
@@ -104,36 +232,36 @@
         transition: .3s ease-in-out;
     }
     .red {
-        border: 2px solid #ff6666;
+        border-color: #ff6666;
         color: #ff6666;
     }
     .red:hover {
-        border: 2px solid #ff6666;
+        border-color: #ff6666;
         background: #ff6666;
     }
     .red_blinking {
         animation: blink;
         animation-duration: 1s;
         animation-iteration-count: infinite;
-        border: 2px solid #ff6666;
+        border-color: #ff6666;
         color: #ff6666;
     }
     @keyframes blink {
         0% {
-            border: 2px solid #ff6666;
+            border-color: #ff6666;
         }
         50% {
-            border: 2px solid #ff6666;
+            border-color: #ff6666;
             background: #ff6666;
             color: white;
         }
     }
     .blue {
-        border: 2px solid #5a78ed;
+        border-color: #5a78ed;
         color: #5a78ed;
     }
     .blue:hover {
-        border: 2px solid #5a78ed;
+        border-color: #5a78ed;
         background: #5a78ed;
     }
 }

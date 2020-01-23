@@ -1,3 +1,9 @@
+@import 'mixin';
+
+div#root {
+    margin: 0;
+}
+
 .triangle {
     margin: -5% 0 0 0;
     width: 100%;
@@ -26,38 +32,71 @@
     padding-bottom: 50px;
 
     .title {
+        $titleSize: 50px;
+
         margin: 0;
         padding: 0;
         color: white;
-        font-size: 50px;
         letter-spacing: 0;
+        font-size: $titleSize;
+        @include media((
+            font-size: (
+                mobile: $titleSize * 2,
+                tablet: $titleSize * 2,
+                laptop: $titleSize,
+                desktop: $titleSize,
+                tv: $titleSize * 1.5
+            )
+        ))
     }
     section {
         margin: 50px;
 
         .game_data {
-            width: 60%;
+            width: 100%;
             margin: 0 auto;
 
             table {
-                width: 100%;
+                width: 80%;
+                margin: 0 auto;
                 color: white;
 
-                thead {
-                    th {
-                        width: 50%;
-                        text-align: center;
-                        font-size: 30px;
-                        text-transform: uppercase;
-                    }
+                th {
+                    width: 50%;
+                    text-align: center;
+                    $scoreHeaderFontSize: 30px;
+                    @include media((
+                        font-size: (
+                            mobile: $scoreHeaderFontSize * 1.7,
+                            tablet: $scoreHeaderFontSize * 1.7,
+                            laptop: $scoreHeaderFontSize,
+                            desktop: $scoreHeaderFontSize,
+                            tv: $scoreHeaderFontSize
+                        )
+                    ));
+                    text-transform: uppercase;
                 }
+                .delimiter {
+                    height: 10px !important;
+                }
+                
                 .attempts,
                 .score {
-                    font-size: 100px;
-
-                    span {
-                        font-size: 30px;
-                    }
+                    $scoreFontSize: 100px;
+                    @include media((
+                        font-size: (
+                            mobile: $scoreFontSize * 2,
+                            tablet: $scoreFontSize * 2,
+                            laptop: $scoreFontSize,
+                            desktop: $scoreFontSize,
+                            tv: $scoreFontSize
+                        )
+                    ));
+                }
+                span {
+                    font-size: 30px;
+                    padding-left: 55px;
+                    padding-right: 30px;
                 }
             }
         }

@@ -1,31 +1,107 @@
+@import 'mixin';
+
 .introduction {
     display: inline-block;
     margin: 40px 40px 0 40px;
-    padding: 15px;
     text-align: left;
-    width: 70%;
+    @include media((
+        width: (
+            mobile: 82%,
+            tablet: 82%,
+            laptop: 70%,
+            desktop: 70%,
+            tv: 70%,
+        ),
+        padding: (
+            mobile: 25px,
+            tablet: 25px,
+            laptop: 15px,
+            desktop: 15px,
+            tv: 15px,
+        )
+    ));
     background: white;
     transition: .3s ease-in-out;
 
     img {
-        width: 50%;
-        display: inline-block;
+        @include media((
+            display: (
+                mobile: 'block',
+                tablet: 'block',
+                laptop: 'inline-block',
+                desktop: 'inline-block',
+                tv: 'inline-block',
+            ),
+            width: (
+                mobile: 100%,
+                tablet: 100%,
+                laptop: 50%,
+                desktop: 50%,
+                tv: 50%,
+            )
+        ));
     }
     .wrap {
-        width: 50%;
-        display: inline-block;
+        @include media((
+            display: (
+                mobile: 'block',
+                tablet: 'block',
+                laptop: 'inline-block',
+                desktop: 'inline-block',
+                tv: 'inline-block',
+            ),
+            width: (
+                mobile: 100%,
+                tablet: 100%,
+                laptop: 50%,
+                desktop: 50%,
+                tv: 50%,
+            )
+        ));
         vertical-align: top;
         text-align: center;
 
         h2 {
+            $headerSize: 22px;
+
             font-family: "DINPro-Medium";
             color: #5a78ed;
-            font-size: 22px;
+
+            font-size: $headerSize;
+            @include media((
+                font-size: (
+                    mobile: $headerSize * 3,
+                    tablet: $headerSize * 3,
+                    laptop: $headerSize,
+                    desktop: $headerSize,
+                    tv: $headerSize * 1.2,
+                )
+            ));
         }
         .rules {
+            $rulesSize: 16px;
+
             margin: 20px;
             border: 1px #5a78ed solid;
             font-family: "DINPro-Medium";
+
+            font-size: $rulesSize;
+            @include media((
+                font-size: (
+                    mobile: $rulesSize * 2.5,
+                    tablet: $rulesSize * 2.5,
+                    laptop: $rulesSize,
+                    desktop: $rulesSize,
+                    tv: $rulesSize * 1.2,
+                ),
+                padding: (
+                    mobile: 20px,
+                    tablet: 20px,
+                    laptop: 0,
+                    desktop: 0,
+                    tv: 0,
+                )
+            ));
 
             ul {
                 li {
@@ -34,8 +110,38 @@
             }
         }
         button {
+            $buttonFontSize: 25px;
             display: inline-block;
-            font-size: 25px;
+            @include media((
+                font-size: (
+                    mobile: $buttonFontSize * 2.5,
+                    tablet: $buttonFontSize * 2.5,
+                    laptop: $buttonFontSize,
+                    desktop: $buttonFontSize,
+                    tv: $buttonFontSize,
+                ),
+                border-width: (
+                    mobile: 5px,
+                    tablet: 5px,
+                    laptop: 2px,
+                    desktop: 2px,
+                    tv: 2px,
+                ),
+                margin: (
+                    mobile: 10px,
+                    tablet: 10px,
+                    laptop: default,
+                    desktop: default,
+                    tv: default,
+                ),
+                padding: (
+                    mobile: 10px,
+                    tablet: 10px,
+                    laptop: default,
+                    desktop: default,
+                    tv: default,
+                )
+            ));
         }
         .divider {
             width:5px;

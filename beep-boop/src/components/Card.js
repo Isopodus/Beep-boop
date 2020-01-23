@@ -1,5 +1,3 @@
-// TODO отключать запись после 20ти секунд и при загрузке файла ограницчение на размер поставить до 10 мб
-
 import React from 'react';
 import { connect } from 'react-redux'
 import { ReactMic } from 'react-mic'

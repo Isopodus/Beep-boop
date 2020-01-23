@@ -51,7 +51,12 @@ class Content extends React.Component {
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td className="attempts">{this.props.currentGame.attempts}</td>
+                                        <td className="attempts">
+                                            { this.props.currentGame.attempts != undefined
+                                                ? 5 - this.props.currentGame.attempts.length
+                                                : null
+                                            }
+                                        </td>
                                         <td className="score"><span>гість</span>0:0<span>додаток</span></td>
                                     </tr>
                                 </tbody>

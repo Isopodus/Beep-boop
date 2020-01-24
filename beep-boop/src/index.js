@@ -16,7 +16,7 @@ const initState = {
     game: !cookies.get('attempts') ? false : true,
     attempts: !cookies.get('attempts') ? [] : cookies.get('attempts'),
     possibleSong: null,
-    computerWon: false,
+    computerWon: true,
     userWon: false
 }
 
@@ -63,7 +63,8 @@ const reducer = (state = initState, action) => {
                 ...state,
                 attempts: temp,
                 possibleSong: null,
-                userWon: state.attempts.length == 5 ? true : false
+                userWon: temp.length >= 5 ? true : false,
+                game: temp.length >= 5 ? false : true
             }
         }
         case 'RIGHT_ANSWER': {

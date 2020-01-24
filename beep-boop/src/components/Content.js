@@ -10,6 +10,7 @@ import '../style/Content.scss'
 import Card from './Card'
 import Introduction from './Introduction'
 import RecognitionResponse from './RecognitionResponse'
+import Result from './Result'
 import audio from '../img/audio.png'
 import text from '../img/text.png'
 
@@ -72,9 +73,7 @@ class Content extends React.Component {
                                     </tr>
                                     <tr className="delimiter">
                                         <td></td>
-                                        <td>
-                                            <span>гість</span><span>додаток</span>
-                                        </td>
+                                        <td><span>гість</span><span>додаток</span></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -90,7 +89,7 @@ class Content extends React.Component {
                             : <Popup open={true} modal>{close => (<RecognitionResponse {...{ close: close }} />)}</Popup>
                         }
                         {this.props.computerWon || this.props.userWon
-                            ? null
+                            ? <Popup open={true} modal>{close => ( <Result {...{close: close}} /> )}</Popup>
                             : null
                         }
                     </section>

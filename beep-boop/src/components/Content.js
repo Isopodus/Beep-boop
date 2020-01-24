@@ -39,10 +39,11 @@ class Content extends React.Component {
         var settings = {
             arrows: false,
             dots: true,
-            infinite: true,
+            infinite: false,
             speed: 500,
             slidesToShow: 1,
-            slidesToScroll: 1
+            slidesToScroll: 1,
+            //customPaging: i => <button className="slider_dot">{i + 1}</button>
         };
         return (
             <>
@@ -62,8 +63,8 @@ class Content extends React.Component {
                                 <tbody>
                                     <tr>
                                         <td className="attempts">
-                                            { this.props.attempts != undefined
-                                                ? 5 - this.props.attempts.length
+                                            {   this.props.attempts ? 
+                                                5 - this.props.attempts.length
                                                 : null
                                             }
                                         </td>

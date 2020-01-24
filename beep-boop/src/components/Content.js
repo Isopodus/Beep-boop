@@ -31,6 +31,9 @@ const data = [
 ]
 
 class Content extends React.Component {
+    constructor(props) {
+        super(props);
+    }
     render() {
         var cards = data.map(record => { return <Card key={record.case} {...record} /> })
         var settings = {
@@ -81,9 +84,14 @@ class Content extends React.Component {
                         <Slider {...settings} className="cards_slider">
                             {cards}
                         </Slider>
-                        {this.props.possibleSong === null
+                        { this.props.possibleSong === null
                             ? null
-                            : <Popup open={true} modal>{close => (<RecognitionResponse {...{ close: close }} />)}</Popup>}
+                            : <Popup open={true} modal>{close => (<RecognitionResponse {...{ close: close }} />)}</Popup>
+                        }
+                        {this.props.computerWon || this.props.userWon
+                            ? null
+                            : null
+                        }
                     </section>
                 </div>
             </>
@@ -95,7 +103,9 @@ function mapStateToProps(state) {
     return {
         attempts: state.attempts,
         game: state.game,
-        possibleSong: state.possibleSong
+        possibleSong: state.possibleSong,
+        computerWon: state.computerWon,
+        userWon: state.userWon
     }
 }
 

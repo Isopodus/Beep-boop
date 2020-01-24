@@ -16,7 +16,8 @@ const initState = {
     game: cookies.get('attempts') == undefined ? false : true,
     attempts: cookies.get('attempts') == undefined ? [] : cookies.get('attempts'),
     possibleSong: null,
-    computerWon: false
+    computerWon: false,
+    userWon: false
 }
 
 const reducer = (state = initState, action) => {
@@ -57,11 +58,23 @@ const reducer = (state = initState, action) => {
         }
         case 'WRONG_ANSWER': {
             let temp = [...state.attempts]
-            temp.push(null);
+            temp.push(action.song);
             return {
                 ...state,
                 attempts: temp,
-                possibleSong: null
+                possibleSong: null,
+                userWon: state.attempts.length == 5 ? true : false
+            }
+        }
+        case 'RIGHT_ANSWER': {
+            let temp = [...state.attempts]
+            temp.push(action.song);
+            return {
+                ...state,
+                game: false,
+                attempts: temp,
+                possibleSong: null,
+                computerWon: true
             }
         }
         default: {

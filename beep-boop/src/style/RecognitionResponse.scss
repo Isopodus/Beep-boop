@@ -16,6 +16,9 @@
         transition: .3s ease-in-out;
     }
     .not_found_sound {
+        display: inline-block;
+        width: 50%;
+
         h1 {
             color: #5a78ed;
             font-size: 25px;
@@ -25,5 +28,50 @@
             font-family: "DINPro-Medium";
             font-size: 20px;
         }
+    }
+    .found_song {
+        width: 50%;
+        vertical-align: top;
+        display: inline-block;
+
+        h1 {
+            color: #5a78ed;
+            font-size: 25px;
+            text-transform: uppercase;
+        }
+        .play {
+            padding-left: 5px;
+            padding-right: 4px;
+            border: 2px solid #ffd940;
+            margin: 0 15px 0 15px;
+            cursor: pointer;
+            display: inline-block;
+            font-size: 20px;
+            color: #ffd940;
+            transition: .3s ease-in-out;
+        }
+        .play:hover {
+            border: 2px solid #ff6666;
+            color: #ff6666;
+            transition: .3s ease-in-out;
+        }
+        p {
+            display: inline-block;
+            font-size: 20px;
+            font-family: "DINPro-Medium";
+        }
+        .buttons {
+            margin: 20px;
+
+            .divider {
+                width:5px;
+                height:auto;
+                display:inline-block;
+            }
+        }
+    }
+    img {
+        display: inline-block;
+        width: 50%;
     }
 }

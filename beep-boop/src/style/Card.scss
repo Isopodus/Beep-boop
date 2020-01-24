@@ -137,6 +137,9 @@
                 color: black;
             }
             .play {
+                padding-left: 5px;
+                padding-right: 4px;
+                border: 2px solid black;
                 margin: 0 15px 0 15px;
                 cursor: pointer;
                 display: inline-block;
@@ -145,6 +148,7 @@
                 transition: .3s ease-in-out;
             }
             .play:hover {
+                border: 2px solid #ff6666;
                 color: #ff6666;
                 transition: .3s ease-in-out;
             }

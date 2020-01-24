@@ -31,10 +31,10 @@ const reducer = (state = initState, action) => {
                 game: true
             }
         }
-        case 'UPDATE_GAME': {
+        case 'UPDATE_SONG': {
             return {
                 ...state,
-                possibleSong: action.game
+                possibleSong: action.song
             }
         }
         case 'UPDATE_BLOB': {
@@ -56,9 +56,12 @@ const reducer = (state = initState, action) => {
             }
         }
         case 'WRONG_ANSWER': {
+            let temp = [...state.attempts]
+            temp.push(null);
             return {
                 ...state,
-                attempts: state.attempts.push(null)
+                attempts: temp,
+                possibleSong: null
             }
         }
         default: {

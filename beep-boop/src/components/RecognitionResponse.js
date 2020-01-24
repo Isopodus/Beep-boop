@@ -31,7 +31,10 @@ class RecognitionResponse extends React.Component {
                             <p>
                                 Здається, додаток не зміг розпізнати пісню. Можливо, це вдасться при наступній раз. Спробуйте покращити якість запису або поточнити текст пісні.
                             </p>
-                            <button className="btn red" onClick={(e) => { return this.props.onClick, this.props.close() }}>
+                            <button className="btn red" onClick={(e) => { 
+                                this.props.close();
+                                this.props.onClick();
+                            }}>
                                 Продовжити гру
                             </button>
                         </div>

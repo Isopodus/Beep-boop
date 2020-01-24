@@ -59,8 +59,8 @@ class Content extends React.Component {
                                 <tbody>
                                     <tr>
                                         <td className="attempts">
-                                            { this.props.currentGame.attempts != undefined
-                                                ? 5 - this.props.currentGame.attempts.length
+                                            { this.props.attempts != undefined
+                                                ? 5 - this.props.attempts.length
                                                 : null
                                             }
                                         </td>
@@ -81,7 +81,7 @@ class Content extends React.Component {
                         <Slider {...settings} className="cards_slider">
                             {cards}
                         </Slider>
-                        {this.props.currentGame.possibleSong === null
+                        {this.props.possibleSong === null
                             ? null
                             : <Popup open={true} modal>{close => (<RecognitionResponse {...{ close: close }} />)}</Popup>}
                     </section>
@@ -93,8 +93,9 @@ class Content extends React.Component {
 
 function mapStateToProps(state) {
     return {
+        attempts: state.attempts,
         game: state.game,
-        currentGame: state.currentGame
+        possibleSong: state.possibleSong
     }
 }
 

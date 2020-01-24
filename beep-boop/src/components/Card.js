@@ -70,10 +70,7 @@ class Card extends React.Component {
         api.sendAudio(formData)
             .then((response) => {
                 if (response.status === 200 && response.data.status === "success") {
-                    this.props.updateGame({
-                        ...this.props.currentGame,
-                        possibleSong: response.data.result ? response.data.result[0] : false
-                    })
+                    this.props.updateGame({ possibleSong: response.data.result ? response.data.result[0] : false })
                 }
             })
             .catch((error) => {
@@ -85,10 +82,7 @@ class Card extends React.Component {
         api.sendText(this.props.text)
             .then((response) => {
                 if (response.status === 200 && response.data.status === "success") {
-                    this.props.updateGame({
-                        ...this.props.currentGame,
-                        possibleSong: response.data.result ? response.data.result[0] : false
-                    })
+                    this.props.updateGame({ possibleSong: response.data.result ? response.data.result[0] : false })
                 }
             })
             .catch((error) => {
@@ -210,7 +204,7 @@ function mapStateToProps(state) {
         blob: state.blob,
         file: state.file,
         text: state.text,
-        currentGame: state.currentGame
+        possibleSong: state.possibleSong
     }
 }
 

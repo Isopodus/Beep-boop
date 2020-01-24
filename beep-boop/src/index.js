@@ -14,11 +14,9 @@ const initState = {
     file: null,
     text: "",
     game: cookies.get('attempts') == undefined ? false : true,
-    currentGame: {
-        attempts: cookies.get('attempts') == undefined ? [] : cookies.get('attempts'),
-        possibleSong: null,
-        computerWon: false
-    }
+    attempts: cookies.get('attempts') == undefined ? [] : cookies.get('attempts'),
+    possibleSong: null,
+    computerWon: false
 }
 
 const reducer = (state = initState, action) => {
@@ -36,7 +34,7 @@ const reducer = (state = initState, action) => {
         case 'UPDATE_GAME': {
             return {
                 ...state,
-                currentGame: action.game
+                possibleSong: action.game
             }
         }
         case 'UPDATE_BLOB': {
@@ -60,10 +58,7 @@ const reducer = (state = initState, action) => {
         case 'WRONG_ANSWER': {
             return {
                 ...state,
-                currentGame: {
-                    ...state.currentGame,
-                    attempts: state.currentGame.attempts.push(null)
-                }
+                attempts: state.attempts.push(null)
             }
         }
         default: {

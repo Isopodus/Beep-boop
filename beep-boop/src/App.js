@@ -22,8 +22,7 @@ class App extends React.Component {
 
 function mapStateToProps(state) {
     return { 
-        game: state.game, 
-        currentGame: state.currentGame 
+        game: state.game
     }
 }
 

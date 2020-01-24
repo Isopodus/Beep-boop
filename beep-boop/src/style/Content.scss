@@ -46,6 +46,20 @@ div#root {
                 laptop: $titleSize,
                 desktop: $titleSize,
                 tv: $titleSize * 1.5
+            ),
+            padding-right: (
+                mobile: 50px,
+                tablet: 50px,
+                laptop: 0,
+                desktop: 0,
+                tv: 0,
+            ),
+            padding-left: (
+                mobile: 50px,
+                tablet: 50px,
+                laptop: 0,
+                desktop: 0,
+                tv: 0,
             )
         ))
     }

@@ -7,9 +7,6 @@ import Header from './components/Header'
 import Content from './components/Content'
 
 class App extends React.Component {
-    constructor(props) {
-        super(props);
-    }
     render() {
         return (
             <>

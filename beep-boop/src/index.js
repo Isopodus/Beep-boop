@@ -13,8 +13,8 @@ const initState = {
     blob: null,
     file: null,
     text: "",
-    game: cookies.get('attempts') == undefined ? false : true,
-    attempts: cookies.get('attempts') == undefined ? [] : cookies.get('attempts'),
+    game: !cookies.get('attempts') ? false : true,
+    attempts: !cookies.get('attempts') ? [] : cookies.get('attempts'),
     possibleSong: null,
     computerWon: false
 }

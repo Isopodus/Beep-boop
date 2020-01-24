@@ -5,18 +5,15 @@ import Cookie from 'universal-cookie'
 import '../style/RecognitionResponse.scss'
 
 class RecognitionResponse extends React.Component {
-    constructor(props) {
-        super(props);
-    }
     componentDidMount() {
         const cookies = new Cookie();
         if (cookies.get('attempts')) {
             var bufCookie = cookies.get('attempts');
-            bufCookie.push(this.props.possibleSong == false ? null : this.props.possibleSong);
+            bufCookie.push(this.props.possibleSong === false ? null : this.props.possibleSong);
             cookies.set('attempts', bufCookie);
         }
         else {
-            cookies.set('attempts', [this.props.possibleSong == false ? null : this.props.possibleSong])
+            cookies.set('attempts', [this.props.possibleSong === false ? null : this.props.possibleSong])
         }
     }
     render() {

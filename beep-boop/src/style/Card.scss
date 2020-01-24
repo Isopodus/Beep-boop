@@ -21,6 +21,12 @@
             tv: 'none'
         )
     ));
+    .slick-dots li button:before
+    {
+        font-family: 'slick';
+        font-size: 20px;
+        line-height: 10px;
+    }
 }
 
 .card {
@@ -266,7 +272,18 @@
     }
 }
 .card:hover {
-    margin: 20px 30px 30px 30px;
-    transition: .3s ease-in-out;
-    box-shadow: 0 15px 15px rgba(0,0,0,0.4);
+    @include media((
+        margin: (
+            mobile-tablet: none,
+            laptop: 20px 30px 30px 30px
+        ),
+        transition: (
+            mobile-tablet: none,
+            laptop: .3s ease-in-out
+        ),
+        box-shadow: (
+            mobile-tablet: none,
+            laptop: 0 15px 15px rgba(0,0,0,0.4),
+        )
+    ));
 }

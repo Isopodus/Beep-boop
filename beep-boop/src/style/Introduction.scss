@@ -75,7 +75,21 @@
                     laptop: $headerSize,
                     desktop: $headerSize,
                     tv: $headerSize * 1.2,
-                )
+                ),
+                padding-right: (
+                    mobile: 20px,
+                    tablet: 20px,
+                    laptop: 0,
+                    desktop: 0,
+                    tv: 0,
+                ),
+                padding-left: (
+                    mobile: 20px,
+                    tablet: 20px,
+                    laptop: 0,
+                    desktop: 0,
+                    tv: 0,
+                ),
             ));
         }
         .rules {
@@ -88,8 +102,8 @@
             font-size: $rulesSize;
             @include media((
                 font-size: (
-                    mobile: $rulesSize * 2.5,
-                    tablet: $rulesSize * 2.5,
+                    mobile: $rulesSize * 2.1,
+                    tablet: $rulesSize * 2.1,
                     laptop: $rulesSize,
                     desktop: $rulesSize,
                     tv: $rulesSize * 1.2,
@@ -151,8 +165,22 @@
     }
 }
 .introduction:hover {
-    margin-top: 30px;
-    margin-bottom: 10px;
-    box-shadow: 0 15px 15px rgba(0,0,0,0.4);
-    transition: .3s ease-in-out;
+    @include media((
+        margin-top: (
+            mobile-tablet: none,
+            laptop: 30px
+        ),
+        margin-bottom: (
+            mobile-tablet: none,
+            laptop: 10px
+        ),
+        transition: (
+            mobile-tablet: none,
+            laptop: .3s ease-in-out
+        ),
+        box-shadow: (
+            mobile-tablet: none,
+            laptop: 0 15px 15px rgba(0,0,0,0.4)
+        )
+    ));
 }

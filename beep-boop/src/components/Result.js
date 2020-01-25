@@ -16,9 +16,10 @@ class Result extends React.Component {
     componentDidMount() {
         // TODO test it
         const cookies = new Cookie();
+        var bufCookie = null;
         if (this.props.computerWon) {
             if (cookies.get('history')) {
-                var bufCookie = cookies.get('history');
+                bufCookie = cookies.get('history');
                 bufCookie.push(cookies.get('attempts')[cookies.get('attempts').length - 1]);
                 cookies.set('history', bufCookie);
             }
@@ -28,7 +29,7 @@ class Result extends React.Component {
         }
         else {
             if (cookies.get('history')) {
-                var bufCookie = cookies.get('history');
+                bufCookie = cookies.get('history');
                 bufCookie.push(null);
                 cookies.set('history', bufCookie);
             }

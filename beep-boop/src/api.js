@@ -24,7 +24,7 @@ const api = {
         if (!('error' in response)) {
             if (response.result instanceof Array) {
                 response.result.forEach(obj => {
-                    if ('media' in obj) {
+                    if ('media' in obj && obj.media !== "") {
                         media = JSON.parse(obj.media)
                         media = media.map(m => {
                             return {
@@ -35,24 +35,24 @@ const api = {
                         })
                     }
                     else {
-                        let media = [{
+                        media = [{
                             "provider": obj.media.provider,
                             "type": obj.media.type,
                             "url": obj.media.url
                         }]
-                        result.append({
-                            "artist": obj.artist,
-                            "title": obj.title,
-                            "media": media
-                        })
                     }
+                    result.push({
+                        "artist": obj.artist,
+                        "title": obj.title,
+                        "media": media
+                    })
                 });
             }
             else if (response.result) {
                 result = [{
                     "artist": ('artist' in response.result) ? response.result.artist : null,
                     "title": response.result.title,
-                    "media": ('media' in response.result) ? JSON.parse(response.result.media) : [{
+                    "media": ('media' in response.result && response.result.media !== "") ? JSON.parse(response.result.media) : [{
                         "provider": "youtube",
                         "type": "audio",
                         "url": ('youtube' in response.result) ? response.result.youtube.link : null,

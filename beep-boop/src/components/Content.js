@@ -32,11 +32,8 @@ const data = [
 ]
 
 class Content extends React.Component {
-    constructor(props) {
-        super(props);
-    }
+
     render() {
-        console.log(this.props.userWon)
         var cards = data.map(record => { return <Card key={record.case} {...record} /> })
         var settings = {
             arrows: false,

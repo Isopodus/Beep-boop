@@ -26,12 +26,8 @@ class History extends React.Component {
                 } 
                 return <tr key={index}>
                     <td>{songs.length - index}</td>
-                    <td style={{ textAlign: "left" }}>{sound && sound.media.length > 0 && sound.media[0].provider === "youtube" ? 
-                    <div style={{
-                        display: "inline-block",
-                        color: "#ffd940",
-                        paddingRight: 10
-                    }} onClick={() => {
+                    <td className="song_cell" style={{ textAlign: "left" }}>{sound && sound.media.length > 0 && sound.media[0].provider === "youtube" ? 
+                    <div className="play" onClick={() => {
                             this.setState({
                                 playing: !this.state.playing
                             });
@@ -40,7 +36,7 @@ class History extends React.Component {
                             { currentSongPlaying && this.state.playing ? String.fromCharCode(9209) : String.fromCharCode(9654) }
                         </div>
                         :
-                        <span style={{ color: "white", paddingRight: 10 }}>{String.fromCharCode(9209)}</span>
+                        <span style={{ color: "white", paddingRight: 10 }}>{String.fromCharCode(9654)}</span>
                         }
                         { sound ? 
                             <p style={{ display: 'inline-block', margin: 0 }}>
@@ -52,7 +48,7 @@ class History extends React.Component {
                             </p>
                         }
                     </td>
-                    <td>
+                    <td className="disabled_on_mobile">
                         {sound ? "Перемiг комп'ютер" : "Перемiг гiсть"}
                     </td>
                 </tr>
@@ -93,9 +89,10 @@ class History extends React.Component {
                         <table>
                             <thead>
                                 <tr>
-                                    <th>Номер гри</th>
+                                    <th className="disabled_on_mobile">Номер гри</th>
+                                    <th className="enabled_on_mobile">№</th>
                                     <th>Композиція</th>
-                                    <th>Результат</th>
+                                    <th className="disabled_on_mobile">Результат</th>
                                 </tr>
                             </thead>
                             <tbody>

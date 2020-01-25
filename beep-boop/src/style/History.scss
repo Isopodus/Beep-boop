@@ -1,3 +1,5 @@
+@import 'mixin';
+
 .history {
     margin: 50px;
     h1 {
@@ -5,16 +7,30 @@
         font-size: 22px;
         color: #5a78ed;
         text-transform: uppercase;
+
+        $headerSize: 22px;
+        @include media((
+            font-size: (
+                mobile: $headerSize * 3,
+                laptop: $headerSize
+            )
+        ));
     }
     .close {
         margin: 15px;
         cursor: pointer;
-        font-size: 50px;
         position: absolute;
         top: 0;
         right: 0;
         color: black;
         transition: .3s ease-in-out;
+
+        @include media((
+            font-size: (
+                mobile: 100px,
+                laptop: 50px
+            )
+        ));
     }
     .close:hover {
         color: #ff6666;
@@ -22,12 +38,40 @@
     }
     .empty_history {
         color: #ffd940;
-        font-size: 25px;
+
+        $textSize: 25px;
+        @include media((
+            font-size: (
+                mobile: $textSize * 2,
+                laptop: $textSize
+            )
+        ));
     }
     .table_wrap {
         min-height: 50vh;
         max-height: 50vh;
         overflow-y: auto;
+    }
+    .disabled_on_mobile {
+        @include media((
+            display: (  
+                mobile: none,
+                laptop: block
+            )
+        ));
+    }
+    .enabled_on_mobile {
+        @include media((
+            display: (  
+                mobile: block,
+                laptop: none
+            )
+        ));
+    }
+    .play {
+        display: inline-block;
+        color: #ffd940;
+        padding-right: 10px;
     }
     table {
         margin: 0 auto;
@@ -36,9 +80,28 @@
         thead {
             th {
                 text-align: center;
-                font-size: 20px;
                 color: #ff6666;
+
+                $headSize: 20px;
+                @include media((
+                    font-size: (
+                        mobile: $headSize * 3,
+                        laptop: $headSize
+                    )
+                ));
             }
+        }
+        .song_cell {
+            padding-left: 30px;
+        }
+        td, div, p {
+            $cellSize: 16px;
+            @include media((
+                font-size: (
+                    mobile: $cellSize * 2.7,
+                    laptop: $cellSize
+                )
+            ));
         }
     }
 }

@@ -80,7 +80,15 @@ div#root {
         span {
             text-transform: uppercase;
             font-weight: bold;
-            font-size: 25px;
+            
+            $spanTextSize: 25px;
+            @include media((
+            font-size: (
+                mobile: $spanTextSize * 2.5,
+                tablet: $spanTextSize * 2.5,
+                laptop: $spanTextSize
+            )
+        ));
         }
     }
     section {

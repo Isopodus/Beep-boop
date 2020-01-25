@@ -71,7 +71,7 @@ class Content extends React.Component {
                 <div className="game">
                     <p className="title">Музичний акiнатор</p>
                     <p className="introductory_description">
-                        Beep-boop - це музичний акінатор, тобто додаток, що здатен розпізнавати надіслану користувачем музику (або частини тексту пісні) та знаходити її оригінал.
+                        Beep-boop - це музичний акінатор, тобто гра, в якiй комп'ютер повинен вiдгадати пiсню що ви загадали.
                     </p>
 
                     <Introduction />

@@ -38,7 +38,6 @@ class RecognitionResponse extends React.Component {
     render() {
         return (
             <div className="response">
-                <div className="close" onClick={this.props.close}>{String.fromCharCode(215)}</div>
                 <>
                     {
                         this.props.possibleSong === false
@@ -46,7 +45,7 @@ class RecognitionResponse extends React.Component {
                         <div className="not_found_sound">
                             <h1>Нажаль, нічого не було знайдено!</h1>
                             <p>
-                                Здається, додаток не зміг розпізнати пісню. Можливо, це вдасться в наступній раз. Спробуйте покращити якість запису або поточнити текст пісні.
+                                Здається, додаток не зміг розпізнати пісню. Спробуйте покращити якість запису або поточнити текст пісні.
                             </p>
                             <button className="btn red" onClick={() => { 
                                 this.props.close();

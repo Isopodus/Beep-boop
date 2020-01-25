@@ -73,7 +73,6 @@ class Result extends React.Component {
 
         return (
             <div className="result">
-                <div className="close" onClick={this.props.close}>{String.fromCharCode(215)}</div>
                 <h1>{this.props.computerWon ? 'Додаток виграв!' : 'Ви виграли!'}</h1>
                 <table>
                     <thead>

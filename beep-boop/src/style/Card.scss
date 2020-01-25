@@ -135,8 +135,15 @@
                 display: inline-block;
                 background: none;
                 border: none;
-                font-size: 30px;
                 transition: .3s ease-in-out;
+
+                @include media((
+                font-size: (
+                    mobile: 70px,
+                    tablet: 70px,
+                    laptop: 30px
+                )
+            ));
             }
             .delete:hover {
                 transition: .3s ease-in-out;
@@ -145,16 +152,22 @@
             .play {
                 padding-left: 5px;
                 padding-right: 4px;
-                border: 2px solid black;
                 margin: 0 15px 0 15px;
                 cursor: pointer;
                 display: inline-block;
                 font-size: 20px;
                 color: black;
                 transition: .3s ease-in-out;
+
+                @include media((
+                font-size: (
+                    mobile: 70px,
+                    tablet: 70px,
+                    laptop: 20px
+                )
+            ));
             }
             .play:hover {
-                border: 2px solid #ff6666;
                 color: #ff6666;
                 transition: .3s ease-in-out;
             }

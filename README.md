@@ -1,5 +1,5 @@
 ### Clone repository
-git clone https://github.com/Isopodus/Beep-boop
+`git clone https://github.com/Isopodus/Beep-boop`
 
 ### Install dependencies
 `yarn`

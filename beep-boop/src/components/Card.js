@@ -66,7 +66,7 @@ class Card extends React.Component {
             file = new File([this.props.blob.blob], "record.mp3", { lastModified: new Date(), type: 'audio/mp3' });
         }
         var formData = new FormData();
-        formData.append("record", file);
+        formData.append("file", file);
         api.sendAudio(formData)
             .then((response) => {
                 if (response.status === 200 && response.data.status === "success") {

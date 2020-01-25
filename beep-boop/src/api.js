@@ -2,13 +2,8 @@ import axios from 'axios'
 const token = "659a449d700136368a532a200f069925"
 const api = {
     sendAudio: (fileFormData) => {
-        return axios.post("https://api.audd.io/", {
-            ...fileFormData,
-            api_token: token
-        }, {
-            headers: {
-            }
-        })
+        fileFormData.append("api_token", token);
+        return axios.post("https://api.audd.io/", fileFormData)
     },
     sendText: (text) => {
         return axios.get("https://api.audd.io/findLyrics/", {

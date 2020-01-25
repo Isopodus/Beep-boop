@@ -36,6 +36,16 @@ class RecognitionResponse extends React.Component {
     }
 
     render() {
+        let playButton = null
+        let endUrl = null
+        if (this.props.possibleSong &&
+            this.props.possibleSong.media.length > 0 && 
+            this.props.possibleSong.media[0].provider === "youtube") {
+                endUrl = this.props.possibleSong.media[0].url
+                playButton = <div onClick={this.toggleListening} className="play">
+                    { this.state.playing ? String.fromCharCode(9209) : String.fromCharCode(9654) }
+                </div>
+            }
         return (
             <div className="response">
                 <>
@@ -58,24 +68,27 @@ class RecognitionResponse extends React.Component {
                         <div className="found_song">
                             <h1>Ми знайшли!</h1>
                             <>
-                                <div onClick={this.toggleListening} className="play">
-                                    { this.state.playing ? String.fromCharCode(9209) : String.fromCharCode(9654) }
-                                </div>
+                                {playButton}
                                 <p style={{ display: 'inline-block', margin: 0 }}>
                                     {this.props.possibleSong.artist} - {this.props.possibleSong.title}
                                 </p>
                                 <ReactPlayer
                                     width="0"
                                     height="0"
+                                    style={{display: "inline-block"}}
                                     className="player"
-                                    url={this.props.possibleSong.media['youtube']}
+                                    url={endUrl}
                                     playing={this.state.playing}
-                                    onEnded={() => this.setState({ playing: false })} />
-                                {/* TODO сделать на разные ресурсы ссылку */}
+                                    onEnded={() => this.setState({ playing: false })} 
+                                    config={{
+                                        youtube: {
+                                        playerVars: { showinfo: 1 }
+                                        }
+                                    }}/>
                             </>
                             <div className="buttons">
                                 <button className="btn red" onClick={() => {
-                                    this.props.rightAnswer();
+                                    this.props.rightAnswer(this.props.possibleSong);
                                     this.props.close();
                                 }}>
                                     Так, це воно!

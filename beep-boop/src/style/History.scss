@@ -1,6 +1,5 @@
 .history {
     margin: 50px;
-
     h1 {
         font-family: "DINPro-Medium";
         font-size: 22px;
@@ -24,6 +23,11 @@
     .empty_history {
         color: #ffd940;
         font-size: 25px;
+    }
+    .table_wrap {
+        min-height: 50vh;
+        max-height: 50vh;
+        overflow-y: auto;
     }
     table {
         margin: 0 auto;

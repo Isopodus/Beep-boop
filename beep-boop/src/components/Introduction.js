@@ -32,7 +32,9 @@ function Introduction(props) {
                         <div className="divider"/>
                     </>
                 }
-                <Popup trigger={<button className="btn red">Історія гри</button>} modal>
+                <Popup trigger={<button className="btn red">Історія гри</button>} modal
+                onOpen={ () => document.body.style.overflow = 'hidden' }
+                onClose={ () => document.body.style.overflow = 'auto' }>
                     {close => ( <History {...{close: close}}/> )}
                 </Popup>
             </div>

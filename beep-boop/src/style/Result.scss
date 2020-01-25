@@ -5,9 +5,35 @@
     .btn {
         @include media((
             margin-top: (
-                mobile: 300px,
-                tablet: 300px,
+                mobile: 130px,
+                tablet: 130px,
                 laptop: 5px
+            )
+        ));
+    }
+    .play_yellow {
+        padding-left: 5px;
+        padding-right: 4px;
+        margin: 0 15px 0 15px;
+        cursor: pointer;
+        display: inline-block;
+        color: #ffd940;
+        transition: .3s ease-in-out;
+
+        @include media((
+            font-size: (
+                mobile: 100px,
+                tablet: 100px,
+                laptop: 30px
+            )
+        ));
+    }
+    .result_title {
+        @include media((
+            font-size: (
+                mobile: 25px,
+                tablet: 50px,
+                laptop: 20px
             )
         ));
     }

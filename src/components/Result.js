@@ -137,6 +137,7 @@ class Result extends React.Component {
                     this.props.updateFile(null);
                     this.props.updateBlob(null);
                     document.getElementById("song_text").value = "";
+                    this.props.reloadScore()
                 }}>
                     Закрити
                 </button>

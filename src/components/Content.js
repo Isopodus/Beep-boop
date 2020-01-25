@@ -39,9 +39,19 @@ class Content extends React.Component {
             userScore: 0,
             computerScore: 0
         }
+
+        this.reloadScore = this.reloadScore.bind(this)
     }
 
     componentDidMount() {
+        this.reloadScore();
+    }
+
+    reloadScore() {
+        this.setState({
+            userScore: 0,
+            computerScore: 0
+        })
         const cookies = new Cookie();
         if (cookies.get('history')) {
             cookies.get('history').forEach(game => {
@@ -58,7 +68,6 @@ class Content extends React.Component {
             })
         }
     }
-
 
     render() {
         var cards = data.map(record => { return <Card key={record.case} {...record} /> })
@@ -84,7 +93,7 @@ class Content extends React.Component {
 
                     <Introduction />
                     { this.props.userWon === true || this.props.computerWon === true
-                        ? <Popup open={true} modal>{close => ( <Result {...{close: close}} /> )}</Popup>
+                        ? <Popup open={true} modal>{close => ( <Result {...{close: close}} reloadScore={this.reloadScore} /> )}</Popup>
                         : null
                     }
                     <section style={{ display: this.props.game ? '' : 'none', marginBottom: 0 }}>

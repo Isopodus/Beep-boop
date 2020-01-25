@@ -1,20 +1,6 @@
 .response {
     margin: 50px;
 
-    .close {
-        margin: 15px;
-        cursor: pointer;
-        font-size: 50px;
-        position: absolute;
-        top: 0;
-        right: 0;
-        color: black;
-        transition: .3s ease-in-out;
-    }
-    .close:hover {
-        color: #ff6666;
-        transition: .3s ease-in-out;
-    }
     .not_found_sound {
         display: inline-block;
         width: 50%;

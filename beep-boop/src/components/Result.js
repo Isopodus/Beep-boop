@@ -16,12 +16,14 @@ class Result extends React.Component {
     }
 
     componentDidMount() {
-        // TODO test it
         const cookies = new Cookie();
         var bufCookie = null;
         if (this.props.computerWon) {
             if (cookies.get('history')) {
                 bufCookie = cookies.get('history');
+                if (bufCookie >= 30) {
+                    bufCookie.shift();
+                }
                 bufCookie.push(cookies.get('attempts')[cookies.get('attempts').length - 1]);
                 cookies.set('history', bufCookie);
             }
@@ -32,6 +34,9 @@ class Result extends React.Component {
         else {
             if (cookies.get('history')) {
                 bufCookie = cookies.get('history');
+                if (bufCookie >= 30) {
+                    bufCookie.shift();
+                }
                 bufCookie.push(null);
                 cookies.set('history', bufCookie);
             }
@@ -43,9 +48,16 @@ class Result extends React.Component {
 
         if (cookies.get('history')) {
             cookies.get('history').forEach(game => {
-                game == null
-                ? this.setState({ userScore: this.state.computerScore + 1 })
-                : this.setState({ computerScore: this.state.userScore + 1 })
+                if (!game) {
+                    this.setState(prevState => {
+                         return { userScore: prevState.userScore + 1 }
+                    })
+                }
+                else {
+                    this.setState((prevState) => {
+                        return { computerScore: prevState.computerScore + 1 }
+                    })
+                }
             })
         }
     }
@@ -73,7 +85,6 @@ class Result extends React.Component {
 
         return (
             <div className="result">
-                <div className="close" onClick={this.props.close}>{String.fromCharCode(215)}</div>
                 <h1>{this.props.computerWon ? 'Додаток виграв!' : 'Ви виграли!'}</h1>
                 <table>
                     <thead>

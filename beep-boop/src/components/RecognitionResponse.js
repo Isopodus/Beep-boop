@@ -38,7 +38,6 @@ class RecognitionResponse extends React.Component {
     render() {
         return (
             <div className="response">
-                <div className="close" onClick={this.props.close}>{String.fromCharCode(215)}</div>
                 <>
                     {
                         this.props.possibleSong === false

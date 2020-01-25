@@ -15,7 +15,7 @@ const initState = {
     text: "",
     game: !cookies.get('attempts') ? false : true,
     attempts: !cookies.get('attempts') ? [] : cookies.get('attempts'),
-    possibleSong: false,
+    possibleSong: null,
     computerWon: false,
     userWon: false
 }
@@ -81,7 +81,21 @@ const reducer = (state = initState, action) => {
         case 'FINISH_GAME': {
             return {
                 ...state,
-                attempts: []
+                attempts: [],
+                computerWon: false,
+                userWon: false
+            }
+        }
+        case 'UPDATE_USER_SCORE': {
+            return {
+                ...state,
+                userScore: state.userScore + 1
+            }
+        }
+        case 'UPDATE_COMPUTER_SCORE': {
+            return {
+                ...state,
+                computerScore: state.computerScore + 1
             }
         }
         default: {

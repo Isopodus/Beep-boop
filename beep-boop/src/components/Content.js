@@ -45,14 +45,21 @@ class Content extends React.Component {
         const cookies = new Cookie();
         if (cookies.get('history')) {
             cookies.get('history').forEach(game => {
-                game == null
-                ? this.setState({ userScore: this.state.computerScore + 1 })
-                : this.setState({ computerScore: this.state.userScore + 1 })
+                if (!game) {
+                    this.setState(prevState => {
+                         return { userScore: prevState.userScore + 1 }
+                    })
+                }
+                else {
+                    this.setState((prevState) => {
+                        return { computerScore: prevState.computerScore + 1 }
+                    })
+                }
             })
         }
     }
 
-    
+
     render() {
         var cards = data.map(record => { return <Card key={record.case} {...record} /> })
         var settings = {
@@ -75,7 +82,7 @@ class Content extends React.Component {
                     </p>
 
                     <Introduction />
-                    { this.props.userWon || this.props.computerWon
+                    { this.props.userWon == true || this.props.computerWon == true
                         ? <Popup open={true} modal>{close => ( <Result {...{close: close}} /> )}</Popup>
                         : null
                     }

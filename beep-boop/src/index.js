@@ -86,6 +86,18 @@ const reducer = (state = initState, action) => {
                 userWon: false
             }
         }
+        case 'UPDATE_USER_SCORE': {
+            return {
+                ...state,
+                userScore: state.userScore + 1
+            }
+        }
+        case 'UPDATE_COMPUTER_SCORE': {
+            return {
+                ...state,
+                computerScore: state.computerScore + 1
+            }
+        }
         default: {
             return state
         }

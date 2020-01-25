@@ -14,6 +14,7 @@ import RecognitionResponse from './RecognitionResponse'
 import Result from './Result'
 import audio from '../img/audio.png'
 import text from '../img/text.png'
+import border from '../img/border.png'
 
 const data = [
     {
@@ -78,7 +79,9 @@ class Content extends React.Component {
                 <div className="game">
                     <p className="title">Музичний акiнатор</p>
                     <p className="introductory_description">
-                        Beep-boop - це музичний акінатор, тобто гра, в якiй комп'ютер повинен вiдгадати пiсню що ви загадали.
+                        <span>Beep-boop</span> - це музичний акінатор, тобто гра, в якiй комп'ютер повинен вiдгадати пiсню, що ви загадали,
+                        і до того ж надасть вам можливість прослухати та насолодитись нею. <span>Зацікавило?</span> Тоді мершій грати!
+
                     </p>
 
                     <Introduction />

@@ -2,8 +2,35 @@
 
 .header {
     text-align: center;
+
+    .left_img {
+        width: 10%;
+        position: absolute;
+        top: 9%;
+        left: 7%;
+        margin: 10%;
+        animation: anty_rotate 30s linear infinite;
+    }
+    .right_img {
+        width: 15%;
+        position: absolute;
+        right: 5%;
+        margin: 5%;
+        animation: anty_rotate 30s linear infinite;
+    }
+    .left_img,
+    .right_img {
+        @keyframes anty_rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+               transform: rotate(-360deg);
+            }
+        }
+    }
     
-    img {
+    .main_img {
         $imgWidth: 40%;
         position: relative;
         z-index: 1;

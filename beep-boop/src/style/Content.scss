@@ -77,10 +77,15 @@ div#root {
                 laptop: $textSize
             )
         ));
+        span {
+            text-transform: uppercase;
+            font-weight: bold;
+            font-size: 25px;
+        }
     }
     section {
         margin: 50px;
-
+        
         .game_data {
             width: 100%;
             margin: 0 auto;

@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux'
 import Popup from "reactjs-popup";
 import Slider from "react-slick";
+import Cookie from 'universal-cookie'
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -34,9 +35,24 @@ const data = [
 class Content extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            userScore: 0,
+            computerScore: 0
+        }
     }
+
+    componentDidMount() {
+        const cookies = new Cookie();
+        if (cookies.get('history')) {
+            cookies.get('history').forEach(game => {
+                game == null
+                ? this.setState({ userScore: this.state.computerScore + 1 })
+                : this.setState({ computerScore: this.state.userScore + 1 })
+            })
+        }
+    }
+
     render() {
-        console.log(this.props.userWon)
         var cards = data.map(record => { return <Card key={record.case} {...record} /> })
         var settings = {
             arrows: false,
@@ -47,6 +63,7 @@ class Content extends React.Component {
             slidesToScroll: 1,
             //customPaging: i => <button className="slider_dot">{i + 1}</button>
         };
+
         return (
             <>
                 <div className="triangle" />
@@ -78,7 +95,7 @@ class Content extends React.Component {
                                                 : null
                                             }
                                         </td>
-                                        <td className="score">0:0</td>
+                                        <td className="score">{this.state.userScore}:{this.state.computerScore}</td>
                                     </tr>
                                     <tr className="delimiter">
                                         <td></td>

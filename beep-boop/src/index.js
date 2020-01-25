@@ -15,7 +15,7 @@ const initState = {
     text: "",
     game: !cookies.get('attempts') ? false : true,
     attempts: !cookies.get('attempts') ? [] : cookies.get('attempts'),
-    possibleSong: null,
+    possibleSong: false,
     computerWon: false,
     userWon: false
 }

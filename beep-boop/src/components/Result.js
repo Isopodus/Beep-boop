@@ -7,7 +7,9 @@ import '../style/Result.scss'
 class Result extends React.Component {
     constructor(props) {
         super(props);this.state = {
-            playing: false
+            playing: false,
+            userScore: 0,
+            computerScore: 0
         }
 
         this.toggleListening = this.toggleListening.bind(this);
@@ -37,6 +39,14 @@ class Result extends React.Component {
             }
         }
         cookies.remove('attempts');
+
+        if (cookies.get('history')) {
+            cookies.get('history').forEach(game => {
+                game == null
+                ? this.setState({ userScore: this.state.computerScore + 1 })
+                : this.setState({ computerScore: this.state.userScore + 1 })
+            })
+        }
     }
 
     toggleListening() {
@@ -73,7 +83,11 @@ class Result extends React.Component {
                     <tbody>
                         <tr>
                             <td>
-                                <span>гість</span><span className="curr_score">0:0</span><span>додаток</span>
+                                <span>гість</span>
+                                <span className="curr_score">
+                                    {this.state.userScore}:{this.state.computerScore}
+                                </span>
+                                <span>додаток</span>
                             </td>
                         </tr>
                     </tbody>

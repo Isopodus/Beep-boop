@@ -17,7 +17,8 @@ const initState = {
     attempts: !cookies.get('attempts') ? [] : cookies.get('attempts'),
     possibleSong: null,
     computerWon: false,
-    userWon: false
+    userWon: false,
+    spinner: false
 }
 
 const reducer = (state = initState, action) => {
@@ -96,6 +97,12 @@ const reducer = (state = initState, action) => {
             return {
                 ...state,
                 computerScore: state.computerScore + 1
+            }
+        }
+        case 'TOGGLE_SPINNER': {
+            return {
+                ...state,
+                spinner: !state.spinner
             }
         }
         default: {

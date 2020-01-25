@@ -67,11 +67,13 @@ class Card extends React.Component {
         }
         var formData = new FormData();
         formData.append("record", file);
+        this.props.toggleSpinner();
         api.sendAudio(formData)
             .then((response) => {
                 if (response.status === 200 && response.data.status === "success") {
                     let generalized = api.generalizeResponse(response.data)
                     this.props.updateSong(generalized.result && generalized.result.length > 0 ? generalized.result[0] : false)
+                    this.props.toggleSpinner();
                 }
             })
             .catch((error) => {
@@ -80,11 +82,13 @@ class Card extends React.Component {
     }
 
     sendText() {
+        this.props.toggleSpinner();
         api.sendText(this.props.text)
             .then((response) => {
                 if (response.status === 200 && response.data.status === "success") {
                     let generalized = api.generalizeResponse(response.data)
                     this.props.updateSong(generalized.result && generalized.result.length > 0 ? generalized.result[0] : false)
+                    this.props.toggleSpinner();
                 }
             })
             .catch((error) => {
@@ -198,6 +202,7 @@ function mapDispatchToProps(dispatch) {
         updateFile: (file) => dispatch({ type: 'UPDATE_FILE', file: file }),
         updateText: (text) => dispatch({ type: 'UPDATE_TEXT', text: text }),
         updateSong: (song) => dispatch({ type: 'UPDATE_SONG', song: song }),
+        toggleSpinner: () => dispatch({ type: 'TOGGLE_SPINNER' })
     }
 }
 

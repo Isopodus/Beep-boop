@@ -14,7 +14,6 @@ import RecognitionResponse from './RecognitionResponse'
 import Result from './Result'
 import audio from '../img/audio.png'
 import text from '../img/text.png'
-import border from '../img/border.png'
 
 const data = [
     {

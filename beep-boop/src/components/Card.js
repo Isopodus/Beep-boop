@@ -70,7 +70,8 @@ class Card extends React.Component {
         api.sendAudio(formData)
             .then((response) => {
                 if (response.status === 200 && response.data.status === "success") {
-                    this.props.updateSong(response.data.result ? response.data.result[0] : false)
+                    let generalized = api.generalizeResponse(response.data)
+                    this.props.updateSong(generalized.result && generalized.result.length > 0 ? generalized.result[0] : false)
                 }
             })
             .catch((error) => {
@@ -82,7 +83,8 @@ class Card extends React.Component {
         api.sendText(this.props.text)
             .then((response) => {
                 if (response.status === 200 && response.data.status === "success") {
-                    this.props.updateSong(response.data.result ? response.data.result[0] : false)
+                    let generalized = api.generalizeResponse(response.data)
+                    this.props.updateSong(generalized.result && generalized.result.length > 0 ? generalized.result[0] : false)
                 }
             })
             .catch((error) => {

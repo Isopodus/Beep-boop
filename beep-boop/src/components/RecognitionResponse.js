@@ -64,15 +64,15 @@ class RecognitionResponse extends React.Component {
                                 </div>
                                 <p style={{ display: 'inline-block', margin: 0 }}>
                                     {this.props.possibleSong.artist} - {this.props.possibleSong.title}
-                                    <ReactPlayer
-                                        width="0"
-                                        height="0"
-                                        className="player"
-                                        url={this.props.possibleSong.media['youtube']}
-                                        playing={this.state.playing}
-                                        onEnded={() => this.setState({ playing: false })} />
-                                    {/* TODO сделать на разные ресурсы ссылку */}
                                 </p>
+                                <ReactPlayer
+                                    width="0"
+                                    height="0"
+                                    className="player"
+                                    url={this.props.possibleSong.media['youtube']}
+                                    playing={this.state.playing}
+                                    onEnded={() => this.setState({ playing: false })} />
+                                {/* TODO сделать на разные ресурсы ссылку */}
                             </>
                             <div className="buttons">
                                 <button className="btn red" onClick={() => {

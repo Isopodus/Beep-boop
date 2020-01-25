@@ -52,6 +52,7 @@ class Content extends React.Component {
         }
     }
 
+    
     render() {
         var cards = data.map(record => { return <Card key={record.case} {...record} /> })
         var settings = {

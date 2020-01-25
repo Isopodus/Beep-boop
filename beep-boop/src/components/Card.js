@@ -62,11 +62,14 @@ class Card extends React.Component {
 
     sendAudio() {
         var file = this.props.file
-        if (!file) {
+        if (!file && this.props.blob) {
             file = new File([this.props.blob.blob], "record.mp3", { lastModified: new Date(), type: 'audio/mp3' });
         }
+        if (!this.props.blob) {
+            return;
+        }
         var formData = new FormData();
-        formData.append("record", file);
+        formData.append("file", file);
         this.props.toggleSpinner();
         api.sendAudio(formData)
             .then((response) => {
@@ -82,18 +85,20 @@ class Card extends React.Component {
     }
 
     sendText() {
-        this.props.toggleSpinner();
-        api.sendText(this.props.text)
-            .then((response) => {
-                if (response.status === 200 && response.data.status === "success") {
-                    let generalized = api.generalizeResponse(response.data)
-                    this.props.updateSong(generalized.result && generalized.result.length > 0 ? generalized.result[0] : false)
-                    this.props.toggleSpinner();
-                }
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+        if (this.props.text !== "") {
+            this.props.toggleSpinner();
+            api.sendText(this.props.text)
+                .then((response) => {
+                    if (response.status === 200 && response.data.status === "success") {
+                        let generalized = api.generalizeResponse(response.data)
+                        this.props.updateSong(generalized.result && generalized.result.length > 0 ? generalized.result[0] : false)
+                        this.props.toggleSpinner();
+                    }
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        }
     }
 
 

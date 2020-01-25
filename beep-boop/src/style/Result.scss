@@ -1,22 +1,81 @@
+@import 'mixin';
+
 .result {
     margin: 50px;
+    .btn {
+        @include media((
+            margin-top: (
+                mobile: 130px,
+                tablet: 130px,
+                laptop: 5px
+            )
+        ));
+    }
+    .play_yellow {
+        padding-left: 5px;
+        padding-right: 4px;
+        margin: 0 15px 0 15px;
+        cursor: pointer;
+        display: inline-block;
+        color: #ffd940;
+        transition: .3s ease-in-out;
 
+        @include media((
+            font-size: (
+                mobile: 100px,
+                tablet: 100px,
+                laptop: 30px
+            )
+        ));
+    }
+    .result_title {
+        @include media((
+            font-size: (
+                mobile: 25px,
+                tablet: 50px,
+                laptop: 20px
+            )
+        ));
+    }
     h1 {
         color: #5a78ed;
-        font-size: 25px;
         text-transform: uppercase;
+
+        $headerSize: 25px;
+        @include media((
+            font-size: (
+                mobile: $headerSize * 3,
+                tablet: $headerSize * 3,
+                laptop: $headerSize
+            )
+        ));
     }
     table {
         margin: 10px;
         font-family: "DINPro-Medium";
-        font-size: 20px;
         width: 100%;
+
+        $textSize: 20px;
+        @include media((
+            font-size: (
+                mobile: $textSize * 3,
+                tablet: $textSize * 3,
+                laptop: $textSize
+            )
+        ));
 
         span {
             margin: 10px;
         }
         .curr_score {
-            font-size: 50px;
+            $spanTextSize: 50px;
+            @include media((
+                font-size: (
+                    mobile: $spanTextSize * 3,
+                    tablet: $spanTextSize * 3,
+                    laptop: $spanTextSize
+                )
+            ));
             color: #ffd940;
         }
     }

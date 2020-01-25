@@ -69,7 +69,6 @@ class Content extends React.Component {
             speed: 500,
             slidesToShow: 1,
             slidesToScroll: 1,
-            //customPaging: i => <button className="slider_dot">{i + 1}</button>
         };
 
         return (
@@ -79,11 +78,12 @@ class Content extends React.Component {
                     <p className="title">Музичний акiнатор</p>
                     <p className="introductory_description">
                         <span>Beep-boop</span> - це музичний акінатор, тобто гра, в якiй комп'ютер повинен вiдгадати пiсню, що ви загадали,
-                        і до того ж надасть вам можливість прослухати та насолодитись нею. <span>Зацікавило?</span> Тоді мершій грати!
+                        і до того ж надасть вам можливість прослухати та насолодитись нею.
+
                     </p>
 
                     <Introduction />
-                    { this.props.userWon == true || this.props.computerWon == true
+                    { this.props.userWon === true || this.props.computerWon === true
                         ? <Popup open={true} modal>{close => ( <Result {...{close: close}} /> )}</Popup>
                         : null
                     }

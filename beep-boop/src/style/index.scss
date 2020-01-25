@@ -1,3 +1,5 @@
+@import 'mixin';
+
 body {
   margin: 0;
   background: #f0f0f0;
@@ -5,13 +7,44 @@ body {
 
   .btn {
     cursor: pointer;
-    padding: 10px;
     font-weight: bold;
     font-family: "DINPro-Medium";
-    font-size: 18px;
     background: none;
     transition: .3s ease-in-out;
     outline: none;
+    border-style: solid;
+
+    $buttonFontSize: 18px;
+        @include media((
+            font-size: (
+                mobile: $buttonFontSize * 3,
+                tablet: $buttonFontSize * 3,
+                laptop: $buttonFontSize,
+                desktop: $buttonFontSize,
+                tv: $buttonFontSize,
+            ),
+            border-width: (
+                mobile: 5px,
+                tablet: 5px,
+                laptop: 2px,
+                desktop: 2px,
+                tv: 2px,
+            ),
+            margin: (
+                mobile: 10px,
+                tablet: 10px,
+                laptop: 5px,
+                desktop: 5px,
+                tv: 5px,
+            ),
+            padding: (
+                mobile: 10px,
+                tablet: 10px,
+                laptop: 7px,
+                desktop: 7px,
+                tv: 7px,
+            )
+        ));
   }
   .btn:hover {
       font-weight: normal;
@@ -19,19 +52,19 @@ body {
       transition: .3s ease-in-out;
   }
   .red {
-      border: 2px solid #ff6666;
+      border-color: #ff6666;
       color: #ff6666;
   }
   .red:hover {
-      border: 2px solid #ff6666;
+      border-color: #ff6666;
       background: #ff6666;
   }
   .blue {
-      border: 2px solid #5a78ed;
+      border-color: #5a78ed;
       color: #5a78ed;
   }
   .blue:hover {
-      border: 2px solid #5a78ed;
+      border-color:#5a78ed;
       background: #5a78ed;
   }
 }

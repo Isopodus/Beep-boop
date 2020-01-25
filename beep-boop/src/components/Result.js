@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux'
+import Cookie from 'universal-cookie'
 
 import '../style/Result.scss'
 
@@ -10,6 +11,32 @@ class Result extends React.Component {
         }
 
         this.toggleListening = this.toggleListening.bind(this);
+    }
+
+    componentDidMount() {
+        // TODO test it
+        const cookies = new Cookie();
+        if (this.props.computerWon) {
+            if (cookies.get('history')) {
+                var bufCookie = cookies.get('history');
+                bufCookie.push(cookies.get('attempts')[cookies.get('attempts').length - 1]);
+                cookies.set('history', bufCookie);
+            }
+            else {
+                cookies.set('history', [ cookies.get('attempts')[cookies.get('attempts').length - 1] ]);
+            }
+        }
+        else {
+            if (cookies.get('history')) {
+                var bufCookie = cookies.get('history');
+                bufCookie.push(null);
+                cookies.set('history', bufCookie);
+            }
+            else {
+                cookies.set('history', [ null ]);
+            }
+        }
+        cookies.remove('attempts');
     }
 
     toggleListening() {
@@ -39,17 +66,32 @@ class Result extends React.Component {
                 <h1>{this.props.computerWon ? 'Додаток виграв!' : 'Ви виграли!'}</h1>
                 <table>
                     <thead>
-                        <th colSpan="3">Поточний рахунок:</th>
+                        <tr>
+                            <th colSpan="3">Поточний рахунок:</th>
+                        </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <span>гість</span><span className="curr_score">0:0</span><span>додаток</span>
+                            <td>
+                                <span>гість</span><span className="curr_score">0:0</span><span>додаток</span>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
-                <button className="btn red" onClick={this.props.close}>Закрити</button>
+                <button className="btn red" onClick={() => {
+                    this.props.close();
+                    this.props.finishGame();
+                }}>
+                    Закрити
+                </button>
             </div>
         )
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        finishGame: () => dispatch({ type: 'FINISH_GAME' })
     }
 }
 
@@ -61,4 +103,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps)(Result)
+export default connect(mapStateToProps, mapDispatchToProps)(Result)

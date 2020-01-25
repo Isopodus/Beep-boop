@@ -16,7 +16,7 @@ const initState = {
     game: !cookies.get('attempts') ? false : true,
     attempts: !cookies.get('attempts') ? [] : cookies.get('attempts'),
     possibleSong: null,
-    computerWon: true,
+    computerWon: false,
     userWon: false
 }
 
@@ -76,6 +76,12 @@ const reducer = (state = initState, action) => {
                 attempts: temp,
                 possibleSong: null,
                 computerWon: true
+            }
+        }
+        case 'FINISH_GAME': {
+            return {
+                ...state,
+                attempts: []
             }
         }
         default: {

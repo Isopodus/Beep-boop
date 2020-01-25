@@ -36,6 +36,7 @@ class Content extends React.Component {
         super(props);
     }
     render() {
+        console.log(this.props.userWon)
         var cards = data.map(record => { return <Card key={record.case} {...record} /> })
         var settings = {
             arrows: false,
@@ -51,7 +52,15 @@ class Content extends React.Component {
                 <div className="triangle" />
                 <div className="game">
                     <p className="title">Музичний акiнатор</p>
+                    <p className="introductory_description">
+                        Beep-boop - це музичний акінатор, тобто додаток, що здатен розпізнавати надіслану користувачем музику (або частини тексту пісні) та знаходити її оригінал.
+                    </p>
+
                     <Introduction />
+                    { this.props.userWon || this.props.computerWon
+                        ? <Popup open={true} modal>{close => ( <Result {...{close: close}} /> )}</Popup>
+                        : null
+                    }
                     <section style={{ display: this.props.game ? '' : 'none', marginBottom: 0 }}>
                         <div className="game_data">
                             <table>
@@ -87,10 +96,6 @@ class Content extends React.Component {
                         { this.props.possibleSong === null
                             ? null
                             : <Popup open={true} modal>{close => (<RecognitionResponse {...{ close: close }} />)}</Popup>
-                        }
-                        {this.props.computerWon || this.props.userWon
-                            ? <Popup open={true} modal>{close => ( <Result {...{close: close}} /> )}</Popup>
-                            : null
                         }
                     </section>
                 </div>

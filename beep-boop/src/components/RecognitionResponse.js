@@ -91,7 +91,7 @@ class RecognitionResponse extends React.Component {
                             </div>
                         </div>
                     }
-                    <img src={search} />
+                    <img src={search} alt="" />
                 </>
             </div>
         )

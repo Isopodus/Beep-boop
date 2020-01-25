@@ -75,7 +75,7 @@ class RecognitionResponse extends React.Component {
                             </>
                             <div className="buttons">
                                 <button className="btn red" onClick={() => {
-                                    this.props.rightAnswer();
+                                    this.props.rightAnswer(this.props.possibleSong);
                                     this.props.close();
                                 }}>
                                     Так, це воно!

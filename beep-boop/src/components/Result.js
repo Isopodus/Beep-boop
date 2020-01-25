@@ -91,6 +91,7 @@ class Result extends React.Component {
                                 </p>
                         </div>
                 }
+                return null
             })
         }
 

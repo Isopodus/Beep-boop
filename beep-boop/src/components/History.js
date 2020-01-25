@@ -32,7 +32,7 @@ class History extends React.Component {
                                 playing: !this.state.playing
                             });
                             this.setState({url: sound.media[0].url})
-                        }} className="play">
+                        }}>
                             { currentSongPlaying && this.state.playing ? String.fromCharCode(9209) : String.fromCharCode(9654) }
                         </div>
                         :

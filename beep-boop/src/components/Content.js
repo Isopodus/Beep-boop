@@ -14,7 +14,6 @@ import RecognitionResponse from './RecognitionResponse'
 import Result from './Result'
 import audio from '../img/audio.png'
 import text from '../img/text.png'
-import border from '../img/border.png'
 
 const data = [
     {
@@ -70,7 +69,6 @@ class Content extends React.Component {
             speed: 500,
             slidesToShow: 1,
             slidesToScroll: 1,
-            //customPaging: i => <button className="slider_dot">{i + 1}</button>
         };
 
         return (
@@ -85,7 +83,7 @@ class Content extends React.Component {
                     </p>
 
                     <Introduction />
-                    { this.props.userWon == true || this.props.computerWon == true
+                    { this.props.userWon === true || this.props.computerWon === true
                         ? <Popup open={true} modal>{close => ( <Result {...{close: close}} /> )}</Popup>
                         : null
                     }

@@ -134,6 +134,9 @@ class Result extends React.Component {
                 <button className="btn red" onClick={() => {
                     this.props.close();
                     this.props.finishGame();
+                    this.props.updateFile(null);
+                    this.props.updateBlob(null);
+                    document.getElementById("song_text").value = "";
                 }}>
                     Закрити
                 </button>
@@ -144,7 +147,9 @@ class Result extends React.Component {
 
 function mapDispatchToProps(dispatch) {
     return {
-        finishGame: () => dispatch({ type: 'FINISH_GAME' })
+        finishGame: () => dispatch({ type: 'FINISH_GAME' }),
+        updateBlob: (blob) => dispatch({ type: 'UPDATE_BLOB', blob: blob }),
+        updateFile: (file) => dispatch({ type: 'UPDATE_FILE', file: file }),
     }
 }
 

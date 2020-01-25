@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux'
+import Popup from "reactjs-popup";
 import { ReactMic } from 'react-mic'
 import ReactPlayer from 'react-player'
 import api from '../api'
@@ -10,7 +11,8 @@ class Card extends React.Component {
         super(props);
         this.state = {
             record: false,
-            playing: false
+            playing: false,
+            popUp: false
         }
 
         this.startRecording = this.startRecording.bind(this);
@@ -49,6 +51,7 @@ class Card extends React.Component {
             e.target.value = null
             this.props.updateFile(false)
             this.props.updateBlob(null)
+            this.setState({ popUp: true })
         }
         else {
             this.props.updateFile(e.target.files[0])
@@ -65,7 +68,7 @@ class Card extends React.Component {
         if (!file && this.props.blob) {
             file = new File([this.props.blob.blob], "record.mp3", { lastModified: new Date(), type: 'audio/mp3' });
         }
-        if (!this.props.blob) {
+        if (!this.props.blob && !this.props.file) {
             return;
         }
         var formData = new FormData();
@@ -76,6 +79,9 @@ class Card extends React.Component {
                 if (response.status === 200 && response.data.status === "success") {
                     let generalized = api.generalizeResponse(response.data)
                     this.props.updateSong(generalized.result && generalized.result.length > 0 ? generalized.result[0] : false)
+                    this.props.toggleSpinner();
+                } else {
+                    this.setState({ popUp: true })
                     this.props.toggleSpinner();
                 }
             })
@@ -92,6 +98,10 @@ class Card extends React.Component {
                     if (response.status === 200 && response.data.status === "success") {
                         let generalized = api.generalizeResponse(response.data)
                         this.props.updateSong(generalized.result && generalized.result.length > 0 ? generalized.result[0] : false)
+                        this.props.toggleSpinner();
+                    }
+                    else {
+                        this.setState({ popUp: true })
                         this.props.toggleSpinner();
                     }
                 })
@@ -184,10 +194,36 @@ class Card extends React.Component {
                                     </>))}
                                 </tbody>
                             </table>
+                        <Popup open={this.state.popUp} modal>
+                            {close => (
+                                <>
+                                    <h1>Сталася помилка! Можливо, ваш файл занадто малий або великий.</h1>
+                                    <button className="btn red" onClick={() => {
+                                        close();
+                                        this.setState({ popUp: false })
+                                    }}>
+                                        Зрозумiло
+                                    </button>
+                                </> 
+                            )}
+                        </Popup>
                         </div>)
                         : (
                             <div>
-                                <textarea onChange={this.handleText} placeholder={"I'm blue da ba dee da ba daa..."} rows={'3'} />
+                                <textarea id="song_text" onChange={this.handleText} placeholder={"I'm blue da ba dee da ba daa..."} rows={'3'} />
+                        <Popup open={this.state.popUp} modal>
+                            {close => (
+                                <>
+                                    <h1>Сталася помилка! Повторiть спробу.</h1>
+                                    <button className="btn red" onClick={() => {
+                                        close();
+                                        this.setState({ popUp: false })
+                                    }}>
+                                        Зрозумiло
+                                    </button>
+                                </>
+                            )}
+                        </Popup>
                             </div>
                         )}
                 </div>
